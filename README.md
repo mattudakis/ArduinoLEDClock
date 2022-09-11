@@ -46,7 +46,7 @@
 |M2x10 microscrews	| flat head screws for attaching backplate | Hardware store/ online	      | 		    | 4         |
 |Glue gun with glue	| glue gun to fix components 		   | Hardware store/ online	      | 		    | 1         |
 |Drill bits and drill	| 12mm, 2mm, and 6mm drill bits and drill  | Hardware store/ online	      | 		    | 3         |
-* The ikea RIBBA frame in black has been discontinued, a oak version is still available, which could be spray pained or an alternative frame could be sourced.
+/* The ikea RIBBA frame in black has been discontinued, a oak version is still available, which could be spray pained or an alternative frame could be sourced.
 &nbsp;
 
 ## Circuit
