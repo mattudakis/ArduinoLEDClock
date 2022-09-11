@@ -60,7 +60,7 @@
 #### Alternativley a Custom PCB can also be fabricated for ease of assembly.
 PCB files found in TheWordClock_diy/CustomPCB
 
-![Alt text](img/WordClock_Schematic.png?raw=true "Title")
+![Alt text](img/WordClock_Schematic.jpg?raw=true "Title")
 
 
 &nbsp;
