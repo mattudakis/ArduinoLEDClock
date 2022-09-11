@@ -14,12 +14,11 @@
 * Real time clock (RTC) time keeping to keep time without power
 * Automatic daylight saving time changes
 
+&nbsp;
+
 <br/>
 ## Components
 
-| Component   | Discription | Source    | reference | Quantity |
-|
-| ----------- | ----------- |-----------|-----------|----------|
-| Frame       | Title       |
-| Paragraph   | Text        |
 
+| Component                         | Discription       | Source		  |Reference           | Quantity	     |
+|-----------------------------------|-------------------|-------------------------|--------------------|---------------------|
