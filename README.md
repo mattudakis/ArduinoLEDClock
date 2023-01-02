@@ -35,7 +35,8 @@
 |Bluetooth BLE module   | BLE blutooth for remote connection       | Amazon/aliexpress	              | HM-10		    | 1         |
 |Push button (momentary)| button to cycle through LED colour       | Amazon/aliexpress	              | Tactile Push Button | 1         |
 |Photoresistor          | measures ambient light to set brightness | Amazon/aliexpress	              | GL5516		    | 1         |
-|Wire/solder	        | wire to connect compenents together      | Amazon/aliexpress	              | 		    | <1 m      |
+|Wire                   | wire to connect compenents together      | Amazon/aliexpress	              | 		    | <1 m      |
+|Soldering iron/solder  | soldering iron to solder all components  | Amazon/hardware store            |                     |           |
 |Custom PCB	        | optional custom PCB to solder components | online PCB manufacturer          | 		    | 1         |
 |Resistors 		| 1x330 1x1K, 1x2K, 2x10k 		   | Amazon/aliexpress	              | 		    | 5         |
 |Capacitor              | 100uF 50V for power surge protection	   | Amazon/aliexpress	              | 		    | 1         |
