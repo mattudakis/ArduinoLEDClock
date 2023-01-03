@@ -69,8 +69,14 @@ PCB files found in TheWordClock_diy/CustomPCB
 &nbsp;
 
 ## Fabrication process
-Step by step guide for wordclock assembly
+The essembly process involves the following steps 
+1. Frame essembly
+2. LED array and power input essembely
+3. Arduino circuit
+4. Button, photoresistor and powersuply
+6. Backplate essembly
+7. Bringing it all together 
 
-to follow... 
+ 
 
 
