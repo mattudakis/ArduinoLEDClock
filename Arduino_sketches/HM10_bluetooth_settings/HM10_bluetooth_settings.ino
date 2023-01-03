@@ -20,7 +20,7 @@
 
 #define BUFFER_LENGTH 100
 
-SoftwareSerial ble(8, 9);       // For Uno, HM10 TX pin to Arduino Uno pin D2, HM10 RX pin to Arduino Uno pin D3
+SoftwareSerial ble(9, 8);       // For Uno, HM10 TX pin to Arduino Uno pin D2, HM10 RX pin to Arduino Uno pin D3
 //SoftwareSerial ble(10,11);      // For Mega 2560, HM10 TX pin to Arduino Mega 2650 pin D10, HM10 RX pin to Arduino Mega 2560 pin D11
 
 char buffer[BUFFER_LENGTH];       // Buffer to store response
@@ -31,6 +31,7 @@ long BLEAutoBaud() {
   int baudcount = sizeof(bauds) / sizeof(long);
   for (int i = 0; i < baudcount; i++) {
     for (int x = 0; x < 3; x++) { // test at least 3 times for each baud
+      
       Serial.print("Testing baud ");
       Serial.println(bauds[i]);
       ble.begin(bauds[i]);
