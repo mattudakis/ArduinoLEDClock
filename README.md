@@ -36,6 +36,7 @@
 |Push button (momentary)| button to cycle through LED colour       | Amazon/aliexpress	              | Tactile Push Button | 1         |
 |Photoresistor          | measures ambient light to set brightness | Amazon/aliexpress	              | GL5516		    | 1         |
 |Wire                   | wire to connect compenents together      | Amazon/aliexpress	              | 		    | <1 m      |
+|Heatshrink tubing	| heat shrink to tidy soldered connections | Amazon					|		| 				|
 |Soldering iron/solder  | soldering iron to solder all components  | Amazon/hardware store            |                     |           |
 |Custom PCB	        | optional custom PCB to solder components | online PCB manufacturer          | 		    | 1         |
 |Resistors 		| 1x330 1x1K, 1x2K, 2x10k 		   | Amazon/aliexpress	              | 		    | 5         |
