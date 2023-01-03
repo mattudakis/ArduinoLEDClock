@@ -111,7 +111,7 @@ void setup() {
 
     BT.begin(9600);
     BT.println("Connected to WordClock");
-
+    
 }
 
 
@@ -126,23 +126,16 @@ void loop()
 //bluetooth settings
     GetInput();
     showNewData();
-    settime();
+    BTChangedatetime();
 
-    
-    
 // run the Clock face LEDs every 500ms
-
-
- 
 
 unsigned long currentMillis = millis();
   if(currentMillis - previousMillis > interval) {
     // save the last time you blinked the LED 
     previousMillis = currentMillis;   
    
-   
-   Clockset();
-   
+    Clockset();
   }
 
     houranimataion(); //hour animataion to run at full speed
@@ -154,142 +147,123 @@ unsigned long currentMillis = millis();
   if (buttonState == HIGH) {
     colour_hue++;
    delay(100);
-  }
-
-  
+  }  
 }
 
 
-
-void Clockset()
-{
-  //*************************** Alter the brightness of the LEDs base on photoresister reading************************  
-   
-    //FastLED.delay(10);
-   
-     
+void Clockset(){
 // ********************* Calculate offset for Daylight saving hours (UK) *********************
-   int y = year();                          // year in 4 digit format
-   uint8_t Mar_x = 31 - (4 + 5*y/4) % 7;      // will find the day of the last sunday in march
-   uint8_t Oct_x = 31 - (1 + 5*y/4) % 7;       // will find the day of the last sunday in Oct
-   uint8_t DST;
+    int y = year();                          // year in 4 digit format
+    uint8_t Mar_x = 31 - (4 + 5*y/4) % 7;      // will find the day of the last sunday in march
+    uint8_t Oct_x = 31 - (1 + 5*y/4) % 7;       // will find the day of the last sunday in Oct
+    uint8_t DST;
                                                
- // *********** Test DST: BEGINS on last Sunday of March @ 2:00 AM *********
+    // *********** Test DST: BEGINS on last Sunday of March @ 2:00 AM *********
     if(month() == 3 && day() == Mar_x && hour() >= 2)
        {                                   
         DST = 1;                           // Daylight Savings Time is TRUE (add one hour)
        }
-   if((month() == 3 && day() > Mar_x) || month() > 3)
+    if((month() == 3 && day() > Mar_x) || month() > 3)
        {
         DST = 1;
        }
-// ************* Test DST: ENDS on Last Sunday of Oct @ 2:00 AM ************  
-
-   if(month() == 10 && day() == Oct_x && hour() >= 2)
+    // ************* Test DST: ENDS on Last Sunday of Oct @ 2:00 AM ************  
+    
+    if(month() == 10 && day() == Oct_x && hour() >= 2)
        {
         DST = 0;                            // daylight savings time is FALSE (Standard time)
        }
-   if((month() == 10 && day() > Oct_x) || month() > 10 || month() < 3 || month() == 3 && day() < Mar_x || month() == 3 && day() == Mar_x && hour() < 2)
+    if((month() == 10 && day() > Oct_x) || month() > 10 || month() < 3 || month() == 3 && day() < Mar_x || month() == 3 && day() == Mar_x && hour() < 2)
        {
         DST = 0;
        }
-
-
-Hour_DST = hour()+DST; //Add the DST to the hour to get correct DST
-if(hour() == 23 && DST == 1)
-{
-  Hour_DST = 00;
-  }
-  
-// ********************************************************************************
-
-
-// push button colour change, hold or press button to cycle through colour
-
-
-if (minute() ==00  && second() > 8 || minute() >00)  {     
-FastLED.clear (); // reset the LEDs prevents old times staying lit up 
-
-
-
-
-ITs(); // light up Its LEDs
-
-if (minute() >= 5 && minute() < 10 || minute() >= 55 && minute() < 60) Five_t();    // if functions to set the time minutes
-if (minute() >= 10 && minute() < 15 || minute() >= 50 && minute() < 55) Ten_t();
-if (minute() >= 15 && minute() < 20 || minute() >= 45 && minute() < 50 ) Quarter_t();
-if (minute() >= 20 && minute() < 25 || minute() >= 40 && minute() < 45) Twenty_t();
-if (minute() >= 25 && minute() < 30 || minute() >= 35 && minute() < 40) TwentyFive_t();
-if (minute() >= 30 && minute() < 35) Half_t();
-
-if (minute() >= 5 && minute() < 35) { // this sets the 'past' light so it only lights up for first 30 mins
-  Past_t();
-  Hour_t();
-}
-
-if (minute() >= 35 && minute() < 60 && hour() <= 23) {
-  To_t();
-Hour_t1();
-}
-
-if (minute() >= 0 && minute() < 5) { // sets the 'oclock' light if the time is on the hour
-Hour_t();
-Oclock_t();
-}
-
-
-//*************** light up the Happybday on birthdays ******************
-
-
-if(month() == 10 && day() ==27 || month() == 2 && day() ==9){
-  
-  H_appy();
-  B_day();
-  FastLED.show();
-  }
-
-//******************************************************
-FastLED.show();
-
-}
-
-
-
-
-// **************animations for quarter to qurter past and half past the hour *******************
-
-  if(minute() == 45 && second() ==00){
-  FastLED.clear ();
-ITs_animate();
-delay(500);
-Quarter_animate();
-To_animate();
-delay(500);
-Hour_1_animate();
-FastLED.show();
-  }
-
-  if(minute() == 15 && second() ==00){
-  FastLED.clear ();
-ITs_animate();
-delay(500);
-Quarter_animate();
-Past_animate();
-delay(500);
-Hour_animate();
-FastLED.show();
-  }
-
-   if(minute() == 30 && second() ==00){
-  FastLED.clear ();
-ITs_animate();
-delay(500);
-Half_animate();
-Past_animate();
-delay(500);
-Hour_animate();
-FastLED.show();
-  }
+    
+    
+    Hour_DST = hour()+DST; //Add the DST to the hour to get correct DST
+    if(hour() == 23 && DST == 1)
+    {
+    Hour_DST = 00;
+    }
+    
+  // ********************************************************************************
+    // the first 8 seconds of the hour is a special animation if its past this time set time as normal
+    
+    if (minute() ==00  && second() > 8 || minute() >00)  {     
+    FastLED.clear (); // reset the LEDs prevents old times staying lit up 
+    
+    ITs(); // light up Its LEDs
+    
+    if (minute() >= 5 && minute() < 10 || minute() >= 55 && minute() < 60) Five_t();    // if functions to set the time minutes
+    if (minute() >= 10 && minute() < 15 || minute() >= 50 && minute() < 55) Ten_t();
+    if (minute() >= 15 && minute() < 20 || minute() >= 45 && minute() < 50 ) Quarter_t();
+    if (minute() >= 20 && minute() < 25 || minute() >= 40 && minute() < 45) Twenty_t();
+    if (minute() >= 25 && minute() < 30 || minute() >= 35 && minute() < 40) TwentyFive_t();
+    if (minute() >= 30 && minute() < 35) Half_t();
+    
+    if (minute() >= 5 && minute() < 35) { // this sets the 'past' light so it only lights up for first 30 mins
+      Past_t();
+      Hour_t();
+    }
+    
+    if (minute() >= 35 && minute() < 60 && hour() <= 23) {
+      To_t();
+      Hour_t1();
+    }
+    
+    if (minute() >= 0 && minute() < 5) { // sets the 'oclock' light if the time is on the hour
+      Hour_t();
+      Oclock_t();
+    }
+    
+    
+    //*************** light up the Happybday on birthdays ******************
+    
+    if(month() == 1 && day() ==6 || month() == 2 && day() ==14){
+      
+      H_appy();
+      B_day();
+      FastLED.show();
+      }
+    
+    //******************************************************
+    FastLED.show();
+    
+    }
+    
+    // **************animations for quarter to qurter past and half past the hour *******************
+    
+    if(minute() == 45 && second() ==00){
+      FastLED.clear ();
+      ITs_animate();
+      delay(500);
+      Quarter_animate();
+      To_animate();
+      delay(500);
+      Hour_1_animate();
+      FastLED.show();
+      }
+    
+    if(minute() == 15 && second() ==00){
+      FastLED.clear ();
+      ITs_animate();
+      delay(500);
+      Quarter_animate();
+      Past_animate();
+      delay(500);
+      Hour_animate();
+      FastLED.show();
+      }
+    
+    if(minute() == 30 && second() ==00){
+      FastLED.clear ();
+      ITs_animate();
+      delay(500);
+      Half_animate();
+      Past_animate();
+      delay(500);
+      Hour_animate();
+      FastLED.show();
+      }
 
 }   //end of clock set
 
@@ -479,37 +453,27 @@ void Animation(){ /// animation to run on the hour
 
 }
 
-//For(int i = 0;i<=20;i++)
-//{ leds[i] = CRGB::Black; } 
-//FastLED.show();
-
-  void houranimataion() {
+void houranimataion() {
 //************* animation for on the hour ************************
 
-if(minute() == 00 && second() >= 00 && second() <=8)
-{
-   Animation();
-  }
-
-if(minute() == 00 && second() == 01){    // do a 10sec animation when it hits the hour
-   ITs(); 
-   FastLED.show();
+  if(minute() == 00 && second() >= 00 && second() <=8){
+    Animation();
     }
-if(minute() == 00 && second() >1 && second() <=2){   
-   
-   ITs();
-   Hour_t();
-   FastLED.show();
-   
-  }
+  if(minute() == 00 && second() == 01){    // do a 10sec animation when it hits the hour
+    ITs(); 
+    FastLED.show();
+    }
+  if(minute() == 00 && second() >1 && second() <=2){   
+    ITs();
+    Hour_t();
+    FastLED.show();
+    }
   if(minute() == 00 && second() >2 && second() <=8){    // do a 8sec animation when it hits the hour
-   
-   ITs();
-   Hour_t();
-   Oclock_t();
-   FastLED.show();
-  }
-  
+    ITs();
+    Hour_t();
+    Oclock_t();
+    FastLED.show();
+    }
 }
 
 
@@ -517,16 +481,14 @@ if(minute() == 00 && second() >1 && second() <=2){
 //******* Brightness settings to work with the light dependent resistor ******************
 
 void BrightnessSet () {
- int ambiant_Light = analogRead(pResistor);    // read the value of the photoresisor
-    int Brightness_Set = map(ambiant_Light, 0, 500, 10, 200); // map the ambiant light value to a LED brightness value
+   int ambiant_Light = analogRead(pResistor);    // read the value of the photoresisor
+   int Brightness_Set = map(ambiant_Light, 0, 500, 10, 200); // map the ambiant light value to a LED brightness value
     
-    if (ambiant_Light >= 500)
-    { 
-    FastLED.setBrightness(200);
+   if (ambiant_Light >= 500){ 
+      FastLED.setBrightness(200);
     }
-   if (ambiant_Light < 500)
-   {
-    FastLED.setBrightness(Brightness_Set);  // set the brightness of the LEDs
+   if (ambiant_Light < 500){
+      FastLED.setBrightness(Brightness_Set);  // set the brightness of the LEDs
    }
 }
 
@@ -535,7 +497,7 @@ void BrightnessSet () {
 // ******************* bluetooth implementation to change date and time ********************************
 
 
-  void GetInput() { //take the message set by bluetooth and then add all the characters together in a char array
+void GetInput() { //take the message set by bluetooth and then add all the characters together in a char array
     static byte ndx = 0;
     char endMarker = '\n';
     char rc;
@@ -548,13 +510,13 @@ void BrightnessSet () {
             ndx++;
             if (ndx >= numChars) {
                 ndx = numChars - 1;
+                }
             }
-        }
         else {
             receivedData[ndx] = '\0'; // terminate the string
             ndx = 0;
             newData = true;
-        }
+            }
     }
 }
 
@@ -562,22 +524,21 @@ void BrightnessSet () {
 
 void showNewData() { //If the message sent is the same as the trigger word "settime" then ask for user to enter date and time
     if (newData == true && (strcmp(SetTime,receivedData) == 0 || strcmp("settime",receivedData) == 0 || strcmp("SETTIME",receivedData) == 0 || strcmp("SetTime/r",receivedData) == 0 || strcmp("set time",receivedData) == 0) ){
-
-       
+        
         BT.println("Set the Time & Date as: hh,mm,ss,dd,mm,yyyy");
         newData = false;
         ChangeTime = true; // set a switch to true that time is going to be changed
     }
 
 
-if (newData == true && (strcmp(SetBday,receivedData) == 0 || strcmp("setbday",receivedData) == 0 || strcmp("SETBDAY",receivedData) == 0 || strcmp("SetBday/r",receivedData) == 0 || strcmp("set bday",receivedData) == 0) ){
+    if (newData == true && (strcmp(SetBday,receivedData) == 0 || strcmp("setbday",receivedData) == 0 || strcmp("SETBDAY",receivedData) == 0 || strcmp("SetBday/r",receivedData) == 0 || strcmp("set bday",receivedData) == 0) ){
 
         newData = false;
         Changebday = true; // set a switch to true that time is going to be changed
     }
 
     
-     if (newData == true && strcmp(SetTime,receivedData) != 0 && ChangeTime == false) {
+    if (newData == true && strcmp(SetTime,receivedData) != 0 && ChangeTime == false) {
           newData = false;
           int a = strcmp(SetTime,receivedData);
           String Cmd = (String)"Cmd not recognised ("+ a + ")"; // if the user input isnt same as trigger word then inform user command not recognised
@@ -586,42 +547,42 @@ if (newData == true && (strcmp(SetBday,receivedData) == 0 || strcmp("setbday",re
         }
 
 
- void settime()  {
-  
-  if (newData == true && ChangeTime == true){ // if a new message has been recieved and the Change time switch is active change the time
-       
-
-char *strings[10];    //following code parses out the date based on being delimited by commas fullstops etc. this gives 
-char *ptr = NULL;
-byte index = 0;
+ void BTChangedatetime()  {
+    
+    if (newData == true && ChangeTime == true){ // if a new message has been recieved and the Change time switch is active change the time
+   
+    char *strings[10];    //following code parses out the date based on being delimited by commas fullstops etc. this gives 
+    char *ptr = NULL;
+    byte index = 0;
+    
     ptr = strtok(receivedData, " :/,.");  // takes a list of delimiters 
-    while(ptr != NULL)
-    {
+    
+    while(ptr != NULL){
         strings[index] = ptr;
         index++;
         ptr = strtok(NULL, " :/,.");  // takes a list of delimiters
-    }
+        }
 
-long hr = atol(strings[0]); // take the parsed date from array which corresponds to hour minute seconds ect. 
-long mm = atol(strings[1]);
-long ss = atol(strings[2]);
-long dd = atol(strings[3]);
-long mth = atol(strings[4]);
-long yyyy = atol(strings[5]);
-String Dateset =  (String)dd+"/"+mth+"/"+yyyy;  //create a string to update user interface to bluetooth 
-String Timeset = (String)hr+":"+mm+":"+ss;
-
- BT.println("Time set as: " + Timeset);
-BT.println("Date set as: " + Dateset);
-
- 
-
-setTime(hr,mm,ss,dd,mth,yyyy);   //this sets the system time set to GMT without the daylight saving added. 
-RTC.set(now());   //sets time onto the RTC. Make sure to comment this out and then re-upload after setting the RTC. -- (setTime() and now() are Part of the Time Library)
-
-        
+    long hr = atol(strings[0]); // take the parsed date from array which corresponds to hour minute seconds ect. 
+    long mm = atol(strings[1]);
+    long ss = atol(strings[2]);
+    long dd = atol(strings[3]);
+    long mth = atol(strings[4]);
+    long yyyy = atol(strings[5]);
+    String Dateset =  (String)dd+"/"+mth+"/"+yyyy;  //create a string to update user interface to bluetooth 
+    String Timeset = (String)hr+":"+mm+":"+ss;
+    
+    BT.println("Time set as: " + Timeset);
+    BT.println("Date set as: " + Dateset);
+    
+    setTime(hr,mm,ss,dd,mth,yyyy);   //this sets the system time set to GMT without the daylight saving added. 
+    RTC.set(now());   
+    
+            
    newData = false;
    ChangeTime = false;
   }
-    }
+}
+
+// TO ADD setting the bday and saving it to the eprom memory
     

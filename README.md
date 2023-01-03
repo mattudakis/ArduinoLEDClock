@@ -66,7 +66,7 @@ PCB files found in WordClock_diy/CustomPCB
 &nbsp;
 
 ## Fabrication process
-Step by step guide for word clock assembly
+Step by step guide for wordclock assembly
 
 to follow... 
 
