@@ -14,7 +14,7 @@
 * Automatic LED brightness control via photoresistor
 * Real time clock (RTC) time keeping to keep time without power
 * Automatic daylight saving time changes
-* Bluetooth connectivity to remotley alter time and date
+* Bluetooth connectivity to remotely alter time and date
 
 &nbsp;
 
