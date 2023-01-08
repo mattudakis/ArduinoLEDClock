@@ -83,8 +83,8 @@ The assembly process involves the following steps
 2. [LED array and power input assembly](#2-led-array-and-power-input-assembly)
 3. [Arduino circuit soldering](#3-arduino-circuit-soldering)
 4. [Button, photoresistor and assembly](#4-push-button-and-photoresistor-assembly)
-6. [Backplate fabrication and final assembly](#backplate-fabrication-and-final-assembly)
-7. [Loading the code onto the Arduino](#loading-the-code-onto-the-arduino)
+6. [Backplate fabrication and final assembly](#5-backplate-fabrication-and-final-assembly)
+7. [Loading the code onto the Arduino](#6-loading-the-code-onto-the-arduino)
 
 &nbsp;
  
