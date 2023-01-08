@@ -158,7 +158,7 @@ The colour of the LEDs in the WordClock can be altered using a push button attac
 - Make sure the wires are quite long so that when attached to the Arduino the back plate can be removed
 - *optional* solder two jump cable female connectors to the wires so that it can be easily removed from the main assembly. Then solder two male header pins to two wires that will be then soldered to the Arduino
 
-![Alt text](img/Pushbutton.jpg?raw=true "Title")
+![Alt text](img/PushButton.jpg?raw=true "Title")
 
 &nbsp;
 
@@ -201,7 +201,7 @@ The Bluetooth module can be used to set the time and date of the clock via a Blu
 - If you would like to change the name of the Bluetooth module you can edit the following line in the [HM-10 bluetooth sketch](Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino)
 
 
-https://github.com/mattudakis/TheWordClock_diy/blob/d9e799738dbfbd42c72308ac002673b626099812/Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino#L134)
+https://github.com/mattudakis/TheWordClock_diy/blob/d9e799738dbfbd42c72308ac002673b626099812/Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino#L134
 
 Changing the `"AT+NAMEWordClock"` to `"AT+NAMEinsertname"`
 
