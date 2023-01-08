@@ -186,6 +186,9 @@ The colour of the LEDs in the WordClock can be altered using a push button attac
 ![Alt text](img/Backplate.jpg?raw=true "Title")
 
 
+&nbsp;
+
+
 #### 6. Loading the code onto the Arduino
 The Arduino code (sketches) needed for the WordClock can be found [here](Arduino_sketches/). These include the [HM-10 bluetooth settings](Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino), The [main WordClock sketch](Arduino_sketches/WordClock_Main/WordClock_Main.ino) and a trouble shooting [Demo real](Arduino_sketches/DemoReel100/DemoReel100.ino) sketch that can be used to check if all the LEDs work. 
 
