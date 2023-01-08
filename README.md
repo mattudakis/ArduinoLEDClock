@@ -1,5 +1,5 @@
-# TheWordClock_diy
-## DIY Arduino LED WordClock
+# The DIY WordClock
+## Build your own Arduino based LED WordClock
 
 ![Alt text](img/WordClock2.jpg?raw=true "Title")
 
