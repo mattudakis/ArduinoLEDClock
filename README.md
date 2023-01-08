@@ -6,6 +6,14 @@
 
 <br/>
 
+## Contents 
+ 1. [Features](#features) - Wordclock features
+ 2. [Components](#components) - Compenents needed to make the Wordclock
+ 3. [Circuit](#circuit) - Circuit and wiring diagram for Wordclock electronics
+ 4. [Fabrication Process](#fabrication-process) - Step-by-step guide for making a Wordclock
+
+&nbsp;
+
 ## Features
 
 * LED colour change button
@@ -14,7 +22,6 @@
 * Automatic LED brightness control via photoresistor
 * Real time clock (RTC) time keeping to keep time without power
 * Automatic daylight saving time changes
-* Bluetooth connectivity to remotely alter time and date
 
 &nbsp;
 
@@ -71,13 +78,34 @@ PCB files found in TheWordClock_diy/CustomPCB
 
 ## Fabrication process
 The essembly process involves the following steps 
-1. Frame essembly
-2. LED array and power input essembely
+1. [Frame essembly](#1-frame-essembly)
+2. [LED array and power input essembely](#2-led-array-and-power-input-essembely)
 3. Arduino circuit
 4. Button, photoresistor and powersuply
 6. Backplate essembly
 7. Bringing it all together 
 
+&nbsp;
  
+#### 1. Frame essembly
+- Discard all parts of the frame except for frame itself
+- Take the wooden laser cut clock face and place it face down within the frame
+- Cut out a piece of baking paper the same size as the clock face and place ontop of the clock. This will difuse the LED light to better diperse the light for each letter. 
+- Essemble the deviders and place on top of the baking paper/ clock face. 
 
+![Alt text](img/Frame_essemble.jpg?raw=true "Title")
+
+ &nbsp;
+
+#### 2. LED array and power input essembely
+**Power input essembely** 
+- Take the USB cable and strip the wires to expose the 4 wires
+- Trim off the two data wires (these are usually green and white) leaving just the power and ground wires
+- Extend the power and ground wires, tidy up the connections to add more stability.
+- With two addional pieces of wire solder the capacitor between the ground and power wire (see [circuit diagram](#circuit)) this will connect to and power the LED array. 
+- Connect both sets of wires to the DC jack making sure the wires are securley in place.
+
+ ![Alt text](img/powerJack.jpg?raw=true "Title")
+
+**LED array essembely**
 
