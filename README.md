@@ -59,7 +59,6 @@
 |Drill bits and drill	| 12mm, 2mm, and 6mm drill bits and drill  | Hardware store/ online	      | 		    | 3         |
 
 *The Ikea RIBBA frame in black has been discontinued. An oak version is still available, which could be spray painted. Alternative frames of the same size can be found on Etsy.
-
 &nbsp;
 
 ## Circuit
@@ -99,7 +98,7 @@ The assembly process involves the following steps
 ![Alt text](img/Frame_essemble.jpg?raw=true "Title")
 
  &nbsp;
-
+---
 #### 2. LED array and power input assembly
 
 **Power input assembly** 
@@ -125,7 +124,7 @@ The assembly process involves the following steps
 ![Alt text](img/LEDarray.jpg?raw=true "Title")
 
 &nbsp;
-
+---
 #### 3. Arduino circuit soldering
 Using either the custom PCB or manual wiring, connect the HM-10, DS3231 RTC and the Arduino nano together. 
 If using manual wiring follow the [circuit diagram](#circuit) ensuring the correct resistors are included. 
@@ -138,7 +137,7 @@ For assembly via the PCB
 ![Alt text](img/PCBSoldered.jpg?raw=true "Title")
 
 &nbsp;
-
+---
 #### 4. Push button and photoresistor assembly
 The colour of the LEDs in the WordClock can be altered using a push button attached to the back of the clock. in addition the brightness of the WordClock is automatically adjusted via a photoresistor which reads the brightness of the environment.
 
@@ -162,7 +161,7 @@ The colour of the LEDs in the WordClock can be altered using a push button attac
 ![Alt text](img/PushButton.jpg?raw=true "Title")
 
 &nbsp;
-
+---
 #### 5. Backplate fabrication and final assembly
 
 **Backplate assembly**
@@ -189,7 +188,7 @@ The colour of the LEDs in the WordClock can be altered using a push button attac
 
 &nbsp;
 
-
+---
 #### 6. Loading the code onto the Arduino
 The Arduino code (sketches) needed for the WordClock can be found [here](Arduino_sketches/). These include the [HM-10 bluetooth settings](Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino), The [main WordClock sketch](Arduino_sketches/WordClock_Main/WordClock_Main.ino) and a trouble shooting [Demo real](Arduino_sketches/DemoReel100/DemoReel100.ino) sketch that can be used to check if all the LEDs work. 
 
@@ -200,16 +199,17 @@ These sketches can be loaded onto the Arduino nano using the [Arduino IDE](https
 
 **Changing the bluetooth settings**
 
-The Bluetooth module can be used to set the time and date of the clock via a Bluetooth terminal app. You can check that the Bluetooth module works by running this sketch on the Arduino and monitor the outcome on the Arduino IDEs serial monitor.
+- To check the Bluetooth module works corretly load the [HM-10 bluetooth sketch](Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino) onto the Arduino and monitor the outcome on the Arduino IDEs serial monitor.
 - This code will change the name of the BLE module from its default "hmsoft" to "WordClock". 
 - If you would like to change the name of the Bluetooth module you can edit the following line in the [HM-10 bluetooth sketch](Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino)
 
 
 https://github.com/mattudakis/TheWordClock_diy/blob/d9e799738dbfbd42c72308ac002673b626099812/Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino#L134
 
-Changing the `"AT+NAMEWordClock"` to `"AT+NAMEinsertname"`
+- Changing the `"AT+NAMEWordClock"` to `"AT+NAMEinsertname"`
 
-- Troubleshooting: If no BLE devices are detected in the Arduino IDE serial monitor, make sure the baud rate of the serial monitor is correct, make sure the HM-10 is wired to the correct pins on the Arduino. 
+*Troubleshooting:* 
+- If no BLE devices are detected in the Arduino IDE serial monitor, make sure the baud rate of the serial monitor is correct, make sure the HM-10 is wired to the correct pins on the Arduino. 
 - If both of these still don’t fix the problem you may have a fault HM-10 module which you can replace. 
 
 &nbsp;
@@ -217,14 +217,14 @@ Changing the `"AT+NAMEWordClock"` to `"AT+NAMEinsertname"`
 
 **Set the correct time in the WordClock sketch**
 
-To set the correct time without having to use Bluetooth the [main WordClock sketch](Arduino_sketches/WordClock_Main/WordClock_Main.ino) can be edited and loaded onto the Arduino.
+- To initially set the time the [WordClock sketch](Arduino_sketches/WordClock_Main/WordClock_Main.ino) can be edited and loaded onto the Arduino.
 
- First uncomment the following lines of code changing the date and time to the correct values.
+- Uncomment the following lines of code changing the date and time to the correct values.
 https://github.com/mattudakis/TheWordClock_diy/blob/12852df04a07dd08134136e3b312919e72e92018/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L106-L108
 
-Load this sketch onto the Arduino, this will set the time on the RTC. It is important that these lines are re-commented out and the sketch reload to the Arduino, otherwise the time will reset to this time every time the power is cycled.
-
-- If the time/ date need changing in the future these can be altered via Bluetooth, using these [guides](#bluetooth-guide-to-follow) 
+- Load this sketch onto the Arduino, this will set the time on the RTC. 
+- Re-comment out the above code in the sketch and reload to the Arduino, this is important otherwise the time will reset every power cycle.
+- The time/ date can be changed remotley in the future via Bluetooth, using these [guides](#bluetooth-guide-to-follow) 
 
 
 &nbsp;
@@ -232,7 +232,8 @@ Load this sketch onto the Arduino, this will set the time on the RTC. It is impo
 
 **Altering the dates for birthdays in the WordClock sketch**
 
-The WordClock will light up a 'Happy Birthday' message on set dates this can be edited via the following code in the [main WordClock sketch](Arduino_sketches/WordClock_Main/WordClock_Main.ino)
+- The WordClock will light up a 'Happy Birthday' message on set dates.
+- To set the dates edit the following code in the [WordClock sketch](Arduino_sketches/WordClock_Main/WordClock_Main.ino)
 
 https://github.com/mattudakis/TheWordClock_diy/blob/12852df04a07dd08134136e3b312919e72e92018/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L219-L226
 
@@ -250,6 +251,7 @@ https://github.com/mattudakis/TheWordClock_diy/blob/12852df04a07dd08134136e3b312
 - Finished!
 
 
+&nbsp;
 
 
 ## Bluetooth guide to follow
