@@ -201,7 +201,7 @@ The Bluetooth module can be used to set the time and date of the clock via a Blu
 - If you would like to change the name of the Bluetooth module you can edit the following line in the [HM-10 bluetooth sketch](Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino)
 
 
-'https://github.com/mattudakis/TheWordClock_diy/blob/12852df04a07dd08134136e3b312919e72e92018/Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino#L134'
+https://github.com/mattudakis/TheWordClock_diy/blob/d9e799738dbfbd42c72308ac002673b626099812/Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino#L134)
 
 Changing the `"AT+NAMEWordClock"` to `"AT+NAMEinsertname"`
 
@@ -216,7 +216,7 @@ Changing the `"AT+NAMEWordClock"` to `"AT+NAMEinsertname"`
 To set the correct time without having to use Bluetooth the [main WordClock sketch](Arduino_sketches/WordClock_Main/WordClock_Main.ino) can be edited and loaded onto the Arduino.
 
  First uncomment the following lines of code changing the date and time to the correct values.
-'https://github.com/mattudakis/TheWordClock_diy/blob/12852df04a07dd08134136e3b312919e72e92018/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L106-L108'
+https://github.com/mattudakis/TheWordClock_diy/blob/12852df04a07dd08134136e3b312919e72e92018/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L106-L108
 
 Load this sketch onto the Arduino, this will set the time on the RTC. It is important that these lines are re-commented out and the sketch reload to the Arduino, otherwise the time will reset to this time every time the power is cycled.
 
@@ -230,7 +230,7 @@ Load this sketch onto the Arduino, this will set the time on the RTC. It is impo
 
 The WordClock will light up a 'Happy Birthday' message on set dates this can be edited via the following code in the [main WordClock sketch](Arduino_sketches/WordClock_Main/WordClock_Main.ino)
 
-'https://github.com/mattudakis/TheWordClock_diy/blob/12852df04a07dd08134136e3b312919e72e92018/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L219-L226'
+https://github.com/mattudakis/TheWordClock_diy/blob/12852df04a07dd08134136e3b312919e72e92018/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L219-L226
 
 - Change the month and day value and add additional dates with an additional or `||` statement.
 - If you'd prefer this can be commented out if you don’t want a Birthday message to show.
