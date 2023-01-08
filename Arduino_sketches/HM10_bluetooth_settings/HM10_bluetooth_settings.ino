@@ -131,7 +131,7 @@ void setup() {
   BLECmd(timeout, "AT+NOTI?", buffer); // Check the current notification bit
   BLECmd(timeout, "AT+NOTI0", buffer); // Make sure the module doesn't send AT+CONNECT or AT+LOST on the serial line
 
-  BLECmd(timeout,"AT+NAMEWordClock4",buffer); // Set the name of the module to HM10
+  BLECmd(timeout,"AT+NAMEWordClock",buffer); // Set the name of the module to HM10
   BLECmd(timeout,"AT+PIO11",buffer); // Set the LED to be off when disconnected and on for connection
   
   
