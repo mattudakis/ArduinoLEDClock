@@ -11,7 +11,7 @@
  2. [Components](#components) - Components needed to make the WordClock
  3. [Circuit](#circuit) - Circuit and wiring diagram for WordClock electronics
  4. [Fabrication Process](#fabrication-process-step-by-step) - Step-by-step guide for making a WordClock
- 5. [Setting the time and data via Bluetooth](#bluetooth-guide-to-follow) 
+ 5. [Setting the time and date via Bluetooth](#bluetooth-guide-to-follow) 
 
 &nbsp;
 
@@ -21,8 +21,7 @@
 * On the hour and quarter hour LED animations 
 * Birthday LED message on set dates
 * Automatic LED brightness control via photoresistor
-* Real time clock (RTC) time keeping to keep time without power
-* Automatic daylight-saving time changes
+* Real time clock (RTC) time keeping with automatic daylight-saving time changes
 
 &nbsp;
 
@@ -82,9 +81,9 @@ The assembly process involves the following steps
 1. [Frame assembly](#1-frame-assembly)
 2. [LED array and power input assembly](#2-led-array-and-power-input-assembly)
 3. [Arduino circuit soldering](#3-arduino-circuit-soldering)
-4. [Button, photoresistor and assembly](#4-push-button-and-photoresistor-assembly)
+4. [Button and photoresistor assembly](#4-push-button-and-photoresistor-assembly)
 6. [Backplate fabrication and final assembly](#5-backplate-fabrication-and-final-assembly)
-7. [Loading the code onto the Arduino](#6-loading-the-code-onto-the-arduino)
+7. [Loading firmware onto the Arduino](#6-loading-the-code-onto-the-arduino)
 
 &nbsp;
  
@@ -92,7 +91,7 @@ The assembly process involves the following steps
 - Discard all parts of the frame except for frame itself
 - Take the wooden laser cut clock face and place it face down within the frame
 - Cut out a piece of baking paper the same size as the clock face and place on top of the clock. 
-> This will diffuse the LED light to better disperse the light for each letter. 
+> This will diffuse the LED light to evenly light each letter. 
 - Assemble the dividers and place on top of the baking paper/ clock face. 
 
 ![Alt text](img/Frame_essemble.jpg?raw=true "Title")
@@ -102,10 +101,10 @@ The assembly process involves the following steps
 #### 2. LED array and power input assembly
 
 **Power input assembly** 
-- Take the USB cable and strip the wires to expose the 4 wires
+- Take the USB cable and strip the external casing to expose the 4 wires
 - Trim off the two data wires (these are usually green and white) leaving just the power and ground wires
-- Extend the power and ground wires, tidy up the connections to add more stability.
-- With two additional pieces of wire solder the capacitor between the ground and power wire (see [circuit diagram](#circuit)) this will connect to and power the LED array. 
+- Extend the power and ground wires and tidy up the connections to add more stability.
+- With two additional pieces of wire solder the capacitor between them (see [circuit diagram](#circuit)) this will connect to and power the LED array. 
 - Connect both sets of wires to the DC jack making sure the wires are securely in place.
 
  ![Alt text](img/powerJack.jpg?raw=true "Title")
@@ -115,11 +114,11 @@ The assembly process involves the following steps
 **LED array assembly**
 - Cut the addressable LEDs to 11 LED strips.
 - Solder the LED strips in a snake like orientation starting from the bottom left.
-> The LEDs are directional so make sure they are solder in the correct direction. This soldering is the most time consuming part. Be patient and use soldering flux to help.
-- Tidy up the soldering connections with some electrical tape or heat shrink tubing
-- Get the LED array template 
-- Using a glue gun add a little glue between each hole in the template and glue the LED strip to the template.
-> Do this one strip at a time to prevent glue drying. Don't glue the first part of the first strip as we will need access to solder this later
+> The LEDs are directional so make sure they are solder in the correct direction. This soldering is time consuming, be patient and use soldering flux to help.
+- Tidy up the soldering connections with some electrical tape or heat shrink tubing.
+- Get the LED array template. 
+- Using a glue gun, add a little glue between each hole in the template and glue the LED strip to the template.
+> Do this one strip at a time to prevent glue drying. Don't glue the first part of the first strip as access to this is needed later
 
 ![Alt text](img/LEDarray.jpg?raw=true "Title")
 
@@ -129,7 +128,7 @@ The assembly process involves the following steps
 Using either the custom PCB or manual wiring, connect the HM-10, DS3231 RTC and the Arduino nano together. 
 If using manual wiring follow the [circuit diagram](#circuit) ensuring the correct resistors are included. 
 
-> The custom PCB will save a lot of time and add more stability to the electronics so this is recommended
+> The custom PCB will save a lot of time and add more stability to the electronics so this is recommended.
   
 For assembly via the PCB
 - Solder the Arduino nano, HM-10 and DS3231 RTC to the PCB along with the various resistors.
@@ -139,24 +138,24 @@ For assembly via the PCB
 &nbsp;
 ---
 #### 4. Push button and photoresistor assembly
-The colour of the LEDs in the WordClock can be altered using a push button attached to the back of the clock. in addition the brightness of the WordClock is automatically adjusted via a photoresistor which reads the brightness of the environment.
+The colour of the LEDs in the WordClock can be altered using a push button attached to the back of the WordClock. In addition the brightness of the WordClock is automatically adjusted to the environments ambient light levels.
 
 &nbsp;
 
-**making the brightness photoresistor**
+**Making the brightness photoresistor**
 - Solder two wires to the photoresistor and tidy the solder contacts with electrical tape or heat shrink tubing.
-- Using a drill, drill a hole slightly larger than the photoresistor diameter
+- Using a drill, drill a hole slightly larger than the photoresistor diameter.
 > To prevent damage to the top of the clock, stick some tape over the drilling area.
-- using a glue gun, glue the photoresistor into the drilled hole ensuring it is flush with the top of the clock and securely in place. 
+- Using a glue gun, glue the photoresistor into the drilled hole ensuring it is flush with the top of the WordClock frame and securely in place. 
 
 ![Alt text](img/Photoresistor.jpg?raw=true "Title")
 
 &nbsp;
 
-**making the push button**
-- Solder a small push button to two wired, tidying the connections with heat shrink/ tape.
-- Make sure the wires are quite long so that when attached to the Arduino the back plate can be removed
-- *optional* solder two jump cable female connectors to the wires so that it can be easily removed from the main assembly. Then solder two male header pins to two wires that will be then soldered to the Arduino
+**Making the push button**
+- Solder a small push button to two wires, tidying the connections with heat shrink/ tape.
+- Make sure the wires are long enough so that when attached to the Arduino the back plate can be removed.
+- *Optional* solder two female jump cable connectors to the wires so that it can be easily removed from the main assembly. Then solder two male header pins to two additional wires that will be then soldered to the Arduino.
 
 ![Alt text](img/PushButton.jpg?raw=true "Title")
 
@@ -165,13 +164,13 @@ The colour of the LEDs in the WordClock can be altered using a push button attac
 #### 5. Backplate fabrication and final assembly
 
 **Backplate assembly**
-- If no pre-cut backplate is available cut a 2-3mm piece MDF or plywood to the same dimensions as the front plate (23x23cm)
-- Using a large drill bit (12 mm) cut a hole at the centre bottom of the backplate. Try to align this with where the DC jack will be glued to the inside of the frame.
-- Using a smaller drill bit drill a hole the same size as the pushbutton button head.
+- If no pre-cut backplate is available cut a 2-3mm piece MDF or plywood to the same dimensions as the front plate (23x23cm).
+- Using a large drill bit (12 mm), cut a hole at the centre bottom of the backplate. Try to align this with where the DC jack will be glued to the inside of the frame.
+- Using a smaller drill bit, drill a hole the same size as the pushbutton button head.
 - Using a glue gun, glue the button assembly to the inside of the backplate, ensure that the button mechanism isn’t glued. 
 - Cut some small pieces of square/circle dowel (1cm diameter) and glue them to the inside corners of the frame.
-> These should be cut to a length that when the backplate rests on them it is flush with the back of the frame.
-- Place the backplate onto the back of the frame and using a very small drill bit drill holes through the base plate and the dowels. 
+> These should be cut to a length that when the backplate rests on them the backplate is flush with the back of the frame.
+- Place the backplate onto the back of the frame and using a very small drill bit, drill holes through the base plate and the dowels. 
 > These holes should be slightly smaller than the micro screws that will be used to fix the baseplate.
 
 &nbsp;
@@ -179,8 +178,8 @@ The colour of the LEDs in the WordClock can be altered using a push button attac
 **Final assembly**
 
 - Using a glue gun, glue the DC Jack to the bottom of the frame, making sure it aligns with the hole in the backplate.
-- Solder the photoresistor and the button to the Arduino/ PCB
-- Solder the power and ground wires from the DC Jack to the first LED strip and at the same time as solder a data and ground wire from the LED strip. Tidy up the connections with heat shrink or tape
+- Solder the photoresistor and the button to the Arduino/ PCB.
+- Solder the power and ground wires from the DC jack to the first LED strip and at the same time, solder a data and ground wire from the LED strip. Tidy up the connections with heat shrink or tape.
 - Solder the data and ground wire from the LED strip to the Arduino / PCB.  
 
 ![Alt text](img/Backplate.jpg?raw=true "Title")
@@ -190,9 +189,10 @@ The colour of the LEDs in the WordClock can be altered using a push button attac
 
 ---
 #### 6. Loading the code onto the Arduino
-The Arduino code (sketches) needed for the WordClock can be found [here](Arduino_sketches/). These include the [HM-10 bluetooth settings](Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino), The [main WordClock sketch](Arduino_sketches/WordClock_Main/WordClock_Main.ino) and a trouble shooting [Demo real](Arduino_sketches/DemoReel100/DemoReel100.ino) sketch that can be used to check if all the LEDs work. 
+The Arduino code (sketches) needed for the WordClock can be found [here](Arduino_sketches/). These include the [HM-10 bluetooth settings](Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino), the [main WordClock sketch](Arduino_sketches/WordClock_Main/WordClock_Main.ino) and a trouble shooting [Demo real](Arduino_sketches/DemoReel100/DemoReel100.ino) sketch that can be used to check if all the LEDs work. 
 
-These sketches can be loaded onto the Arduino nano using the [Arduino IDE](https://www.arduino.cc/en/software)
+These sketches can be loaded onto the Arduino nano using the [Arduino IDE.](https://www.arduino.cc/en/software)
+There are several Arduino libraries needed for this project found [here.](libraries\) These need to be added to the Arduino IDEs library folder.
 
 &nbsp;
 
@@ -205,11 +205,11 @@ These sketches can be loaded onto the Arduino nano using the [Arduino IDE](https
 
 https://github.com/mattudakis/DIY_WordClock/blob/d9e799738dbfbd42c72308ac002673b626099812/Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino#L134
 
-- Changing the `"AT+NAMEWordClock"` to `"AT+NAMEinsertname"`
+- Changing the `"AT+NAMEWordClock"` to `"AT+NAME*insertname*"`
 
 *Troubleshooting:* 
-- If no BLE devices are detected in the Arduino IDE serial monitor, make sure the baud rate of the serial monitor is correct, make sure the HM-10 is wired to the correct pins on the Arduino. 
-- If both of these still don’t fix the problem you may have a fault HM-10 module which you can replace. 
+- If no BLE devices are detected in the Arduino IDE serial monitor, make sure the baud rate of the serial monitor is correct and make sure the HM-10 is wired to the correct pins on the Arduino. 
+- If both of these still don’t fix the problem you may have a faulty HM-10 module which you can replace. 
 
 &nbsp;
 
@@ -223,7 +223,7 @@ https://github.com/mattudakis/DIY_WordClock/blob/d9e799738dbfbd42c72308ac002673b
 https://github.com/mattudakis/DIY_WordClock/blob/12852df04a07dd08134136e3b312919e72e92018/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L103-L110
 
 - Load this sketch onto the Arduino, this will set the time on the RTC. 
-- Re-comment out the above code in the sketch and reload to the Arduino, this is important otherwise the time will reset every power cycle.
+- Re-comment out the above code in the sketch and reload to the Arduino. This is important otherwise the time will reset every power cycle.
 - The time/ date can be changed remotley in the future via Bluetooth, using these [guides](#bluetooth-guide-to-follow) 
 
 
@@ -238,7 +238,7 @@ https://github.com/mattudakis/DIY_WordClock/blob/12852df04a07dd08134136e3b312919
 https://github.com/mattudakis/DIY_WordClock/blob/12852df04a07dd08134136e3b312919e72e92018/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L219-L228
 
 - Change the month and day value and add additional dates with an additional or `||` statement.
-- If you'd prefer this can be commented out if you don’t want a Birthday message to show.
+- If you'd prefer not to have a Birthday message show, this section of code can be commented out.
 
 
 &nbsp;
@@ -248,7 +248,7 @@ https://github.com/mattudakis/DIY_WordClock/blob/12852df04a07dd08134136e3b312919
 
 - After loading the main WordClock sketch onto the Arduino replace the USB with the power USB.
 - Attach the backplate to the clock with micro screws, plug the WordClock in and check that the colour change button and brightness sensor work.
-- Finished!
+- If everythin it working correctly the WordClock is finished!
 
 
 &nbsp;
