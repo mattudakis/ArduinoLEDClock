@@ -236,7 +236,7 @@ https://github.com/mattudakis/DIY_WordClock/blob/12852df04a07dd08134136e3b312919
 - The WordClock will light up a 'Happy Birthday' message on set dates.
 - To set the dates edit the following code in the [WordClock sketch](Arduino_sketches/WordClock_Main/WordClock_Main.ino)
 
-https://github.com/mattudakis/TheWordClock_diy/blob/12852df04a07dd08134136e3b312919e72e92018/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L219-L226
+https://github.com/mattudakis/DIY_WordClock/blob/12852df04a07dd08134136e3b312919e72e92018/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L219-L228
 
 - Change the month and day value and add additional dates with an additional or `||` statement.
 - If you'd prefer this can be commented out if you don’t want a Birthday message to show.
