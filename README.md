@@ -203,8 +203,7 @@ These sketches can be loaded onto the Arduino nano using the [Arduino IDE](https
 - This code will change the name of the BLE module from its default "hmsoft" to "WordClock". 
 - If you would like to change the name of the Bluetooth module you can edit the following line in the [HM-10 bluetooth sketch](Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino)
 
-
-https://github.com/mattudakis/TheWordClock_diy/blob/d9e799738dbfbd42c72308ac002673b626099812/Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino#L134
+https://github.com/mattudakis/DIY_WordClock/blob/d9e799738dbfbd42c72308ac002673b626099812/Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino#L134
 
 - Changing the `"AT+NAMEWordClock"` to `"AT+NAMEinsertname"`
 
