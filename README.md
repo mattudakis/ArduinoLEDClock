@@ -88,8 +88,8 @@ The assembly process involves the following steps
 &nbsp;
  
 #### 1. Frame assembly
-- Discard all parts of the frame except for frame itself
-- Take the wooden laser cut clock face and place it face down within the frame
+- Discard all parts of the frame except for frame itself.
+- Take the wooden laser cut clock face and place it face down within the frame.
 - Cut out a piece of baking paper the same size as the clock face and place on top of the clock. 
 > This will diffuse the LED light to evenly light each letter. 
 - Assemble the dividers and place on top of the baking paper/ clock face. 
@@ -101,8 +101,8 @@ The assembly process involves the following steps
 #### 2. LED array and power input assembly
 
 **Power input assembly** 
-- Take the USB cable and strip the external casing to expose the 4 wires
-- Trim off the two data wires (these are usually green and white) leaving just the power and ground wires
+- Take the USB cable and strip the external casing to expose the 4 wires.
+- Trim off the two data wires (these are usually green and white) leaving just the power and ground wires.
 - Extend the power and ground wires and tidy up the connections to add more stability.
 - With two additional pieces of wire solder the capacitor between them (see [circuit diagram](#circuit)) this will connect to and power the LED array. 
 - Connect both sets of wires to the DC jack making sure the wires are securely in place.
@@ -118,7 +118,7 @@ The assembly process involves the following steps
 - Tidy up the soldering connections with some electrical tape or heat shrink tubing.
 - Get the LED array template. 
 - Using a glue gun, add a little glue between each hole in the template and glue the LED strip to the template.
-> Do this one strip at a time to prevent glue drying. Don't glue the first part of the first strip as access to this is needed later
+> Do this one strip at a time to prevent glue drying. Don't glue the first part of the first strip as access to this is needed later.
 
 ![Alt text](img/LEDarray.jpg?raw=true "Title")
 
@@ -201,7 +201,7 @@ There are several Arduino libraries needed for this project found [here.](librar
 
 - To check the Bluetooth module works corretly load the [HM-10 bluetooth sketch](Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino) onto the Arduino and monitor the outcome on the Arduino IDEs serial monitor.
 - This code will change the name of the BLE module from its default "hmsoft" to "WordClock". 
-- If you would like to change the name of the Bluetooth module you can edit the following line in the [HM-10 bluetooth sketch](Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino)
+- If you would like to change the name of the Bluetooth module you can edit the following line in the [HM-10 bluetooth sketch.](Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino)
 
 https://github.com/mattudakis/DIY_WordClock/blob/d9e799738dbfbd42c72308ac002673b626099812/Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino#L134
 
@@ -233,7 +233,7 @@ https://github.com/mattudakis/DIY_WordClock/blob/12852df04a07dd08134136e3b312919
 **Altering the dates for birthdays in the WordClock sketch**
 
 - The WordClock will light up a 'Happy Birthday' message on set dates.
-- To set the dates edit the following code in the [WordClock sketch](Arduino_sketches/WordClock_Main/WordClock_Main.ino)
+- To set the dates edit the following code in the [WordClock sketch.](Arduino_sketches/WordClock_Main/WordClock_Main.ino)
 
 https://github.com/mattudakis/DIY_WordClock/blob/12852df04a07dd08134136e3b312919e72e92018/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L219-L228
 
