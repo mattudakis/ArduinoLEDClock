@@ -220,7 +220,8 @@ https://github.com/mattudakis/TheWordClock_diy/blob/d9e799738dbfbd42c72308ac0026
 - To initially set the time the [WordClock sketch](Arduino_sketches/WordClock_Main/WordClock_Main.ino) can be edited and loaded onto the Arduino.
 
 - Uncomment the following lines of code changing the date and time to the correct values.
-https://github.com/mattudakis/TheWordClock_diy/blob/12852df04a07dd08134136e3b312919e72e92018/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L106-L108
+
+https://github.com/mattudakis/DIY_WordClock/blob/12852df04a07dd08134136e3b312919e72e92018/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L103-L110
 
 - Load this sketch onto the Arduino, this will set the time on the RTC. 
 - Re-comment out the above code in the sketch and reload to the Arduino, this is important otherwise the time will reset every power cycle.
