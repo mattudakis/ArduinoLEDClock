@@ -27,8 +27,7 @@
 
 Happy Birthday message and some different colour options
 
-<img src="img/hbday_animation.jpg" width="235" height="245">
-<img src="img/colouroptions.GIF" width="245" height="245">
+<img src="img/hbday_animation.jpg" width="235" height="245"> <img src="img/colouroptions.GIF" width="245" height="245">
 
 On the hour and quarter hour animations
 
