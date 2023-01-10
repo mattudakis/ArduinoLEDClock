@@ -25,6 +25,16 @@
 
 &nbsp;
 
+Happy Birthday message and some different colour options
+
+<img src="img/hbday_animation.jpg" width="235" height="245">
+<img src="img/colouroptions.GIF" width="245" height="245">
+
+On the hour and quarter hour animations
+
+<img src="img/quarter_animation.GIF" width="235" height="250">
+<img src="img/hour_animation.GIF" width="233" height="250">
+
 
 ## Components
 
@@ -192,7 +202,7 @@ The colour of the LEDs in the WordClock can be altered using a push button attac
 The Arduino code (sketches) needed for the WordClock can be found [here](Arduino_sketches/). These include the [HM-10 bluetooth settings](Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino), the [main WordClock sketch](Arduino_sketches/WordClock_Main/WordClock_Main.ino) and a trouble shooting [Demo real](Arduino_sketches/DemoReel100/DemoReel100.ino) sketch that can be used to check if all the LEDs work. 
 
 These sketches can be loaded onto the Arduino nano using the [Arduino IDE.](https://www.arduino.cc/en/software)
-There are several Arduino libraries needed for this project found [here.](libraries\) These need to be added to the Arduino IDEs library folder.
+There are several Arduino libraries needed for this project found [here.](Libraries/) These need to be added to the Arduino IDEs library folder.
 
 &nbsp;
 
