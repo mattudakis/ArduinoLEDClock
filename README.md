@@ -31,8 +31,7 @@ Happy Birthday message and some different colour options
 
 On the hour and quarter hour animations
 
-<img src="img/quarter_animation.GIF" width="235" height="250">
-<img src="img/hour_animation.GIF" width="233" height="250">
+<img src="img/quarter_animation.GIF" width="235" height="250"> <img src="img/hour_animation.GIF" width="233" height="250">
 
 
 ## Components
