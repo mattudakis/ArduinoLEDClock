@@ -69,7 +69,7 @@ On the hour and quarter hour animations
 
 ## Circuit
 
-#### Circuit components can be connected following the WordClock circuit
+#### Circuit components can be connected following the Arduino clock circuit
 
 ![Alt text](img/WordClock_circuit_diagram.jpg?raw=true "Title")
 
@@ -145,7 +145,7 @@ For assembly via the PCB
 &nbsp;
 ---
 #### 4. Push button and photoresistor assembly
-The colour of the LEDs in the WordClock can be altered using a push button attached to the back of the WordClock. In addition the brightness of the WordClock is automatically adjusted to the environments ambient light levels.
+The colour of the LEDs in the clock can be altered using a push button attached to the back of the clock. In addition the brightness of the clock is automatically adjusted to the environments ambient light levels.
 
 &nbsp;
 
@@ -153,7 +153,7 @@ The colour of the LEDs in the WordClock can be altered using a push button attac
 - Solder two wires to the photoresistor and tidy the solder contacts with electrical tape or heat shrink tubing.
 - Using a drill, drill a hole slightly larger than the photoresistor diameter.
 > To prevent damage to the top of the clock, stick some tape over the drilling area.
-- Using a glue gun, glue the photoresistor into the drilled hole ensuring it is flush with the top of the WordClock frame and securely in place. 
+- Using a glue gun, glue the photoresistor into the drilled hole ensuring it is flush with the top of the clock frame and securely in place. 
 
 ![Alt text](img/Photoresistor.jpg?raw=true "Title")
 
@@ -196,7 +196,7 @@ The colour of the LEDs in the WordClock can be altered using a push button attac
 
 ---
 #### 6. Loading the code onto the Arduino
-The Arduino code (sketches) needed for the WordClock can be found [here](Arduino_sketches/). These include the [HM-10 bluetooth settings](Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino), the [main WordClock sketch](Arduino_sketches/WordClock_Main/WordClock_Main.ino) and a trouble shooting [Demo real](Arduino_sketches/DemoReel100/DemoReel100.ino) sketch that can be used to check if all the LEDs work. 
+The Arduino code (sketches) used for the clock can be found [here](Arduino_sketches/). These include the [HM-10 bluetooth settings](Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino), the [main clock sketch](Arduino_sketches/WordClock_Main/WordClock_Main.ino) and a trouble shooting [Demo real](Arduino_sketches/DemoReel100/DemoReel100.ino) sketch that can be used to check if all the LEDs work. 
 
 These sketches can be loaded onto the Arduino nano using the [Arduino IDE.](https://www.arduino.cc/en/software)
 There are several Arduino libraries needed for this project found [here.](Libraries/) These need to be added to the Arduino IDEs library folder.
@@ -210,7 +210,7 @@ There are several Arduino libraries needed for this project found [here.](Librar
 - This code will change the name of the BLE module from its default "hmsoft" to "WordClock". 
 - If you would like to change the name of the Bluetooth module you can edit the following line in the [HM-10 bluetooth sketch.](Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino)
 
-https://github.com/mattudakis/DIY_WordClock/blob/d9e799738dbfbd42c72308ac002673b626099812/Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino#L134
+https://github.com/mattudakis/ArduinoLEDClock/blob/d9e799738dbfbd42c72308ac002673b626099812/Arduino_sketches/HM10_bluetooth_settings/HM10_bluetooth_settings.ino#L134
 
 - Changing the `"AT+NAMEWordClock"` to `"AT+NAME*insertname*"`
 
@@ -221,13 +221,13 @@ https://github.com/mattudakis/DIY_WordClock/blob/d9e799738dbfbd42c72308ac002673b
 &nbsp;
 
 
-**Set the correct time in the WordClock sketch**
+**Set the correct time in the clock sketch**
 
 - To initially set the time the [WordClock sketch](Arduino_sketches/WordClock_Main/WordClock_Main.ino) can be edited and loaded onto the Arduino.
 
 - Uncomment the following lines of code changing the date and time to the correct values.
 
-https://github.com/mattudakis/DIY_WordClock/blob/12852df04a07dd08134136e3b312919e72e92018/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L103-L110
+https://github.com/mattudakis/ArduinoLEDClock/blob/12852df04a07dd08134136e3b312919e72e92018/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L103-L110
 
 - Load this sketch onto the Arduino, this will set the time on the RTC. 
 - Re-comment out the above code in the sketch and reload to the Arduino. This is important otherwise the time will reset every power cycle.
@@ -237,12 +237,12 @@ https://github.com/mattudakis/DIY_WordClock/blob/12852df04a07dd08134136e3b312919
 &nbsp;
 
 
-**Altering the dates for birthdays in the WordClock sketch**
+**Altering the dates for birthdays in the clock sketch**
 
-- The WordClock will light up a 'Happy Birthday' message on set dates.
-- To set the dates edit the following code in the [WordClock sketch.](Arduino_sketches/WordClock_Main/WordClock_Main.ino)
+- The clock will light up a 'Happy Birthday' message on set dates.
+- To set the dates edit the following code in the [clock sketch.](Arduino_sketches/WordClock_Main/WordClock_Main.ino)
 
-https://github.com/mattudakis/DIY_WordClock/blob/12852df04a07dd08134136e3b312919e72e92018/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L219-L228
+https://github.com/mattudakis/ArduinoLEDClock/blob/12852df04a07dd08134136e3b312919e72e92018/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L219-L228
 
 - Change the month and day value and add additional dates with an additional or `||` statement.
 - If you'd prefer not to have a Birthday message show, this section of code can be commented out.
@@ -253,9 +253,9 @@ https://github.com/mattudakis/DIY_WordClock/blob/12852df04a07dd08134136e3b312919
 
 **Finished**
 
-- After loading the main WordClock sketch onto the Arduino replace the USB with the power USB.
-- Attach the backplate to the clock with micro screws, plug the WordClock in and check that the colour change button and brightness sensor work.
-- If everythin it working correctly the WordClock is finished!
+- After loading the main clock sketch onto the Arduino replace the USB with the power USB.
+- Attach the backplate to the clock with micro screws, plug the clock in and check that the colour change button and brightness sensor work.
+- If everything it working correctly the clock is finished!
 
 
 &nbsp;
