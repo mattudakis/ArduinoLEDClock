@@ -6,10 +6,10 @@
 <br/>
 
 ## Contents 
- 1. [Features](#features) - WordClock features
- 2. [Components](#components) - Components needed to make the WordClock
- 3. [Circuit](#circuit) - Circuit and wiring diagram for WordClock electronics
- 4. [Fabrication Process](#fabrication-process-step-by-step) - Step-by-step guide for making a WordClock
+ 1. [Features](#features) - Clock features
+ 2. [Components](#components) - Components used to make the clock
+ 3. [Circuit](#circuit) - Circuit and wiring diagram for clock electronics
+ 4. [Fabrication Process](#fabrication-process-step-by-step) - guide of build process.
  5. [Setting the time and date via Bluetooth](#bluetooth-guide-to-follow) 
 
 &nbsp;
