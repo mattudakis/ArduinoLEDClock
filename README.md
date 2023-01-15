@@ -269,9 +269,9 @@ The clock should keep good time and automatically alter the time for daylight sa
 
 **1. Download a Blueooth terminal app onto a smartphone/tablet** 
 
-To talk to the clock via Bluetooth a bluetooth (BLE) terminal is needed. 
+To talk to the clock via Bluetooth a bluetooth (BLE) terminal app is needed. 
 
-- The following apps which have been tested and can be downloaded on the iOS app store or android's Goggle Play app store.
+- The following apps which have been tested, can be downloaded on the iOS app store or android's Goggle Play app store.
 - iOS devices "BLE Terminal HM-10" app.
 - Android devices "BLE Terminal" app.
 
@@ -293,7 +293,7 @@ To talk to the clock via Bluetooth a bluetooth (BLE) terminal is needed.
 **3. Send the "settime" command** 
 
 - Type the command `settime` and press the "send ASCII" button. 
-- The terminal should respond the message shown in the image below. 
+- The terminal should respond with the message shown in the image below. 
 
 &nbsp; <img src="img/IMG_settime1.PNG" width="281" height="575"> &nbsp;&nbsp; <img src="img/IMG_settime2.PNG" width="281" height="575"> 
 
@@ -301,7 +301,7 @@ To talk to the clock via Bluetooth a bluetooth (BLE) terminal is needed.
 
 **4. Send the new time and date**
 
-- Type out the current time and date in the following format: hh,mm,ss,dd,mm,yyyy corresponding to hour,minute,seconds,day,month,year.
+- Type out the current time and date in the following format: hh,mm,ss,dd,mm,yyyy corresponding to hour,minutes,seconds,day,month,year.
 - The values should have a comma, slash or colon between them. 
 - Press the "send ASCII" button to set the time and date 
 - If the time is set correctly a message will be shown as seen in the image below.
