@@ -1,4 +1,4 @@
-# Arduino based LED Clock
+# Arduino based LED WordClock
 
 ![Alt text](img/WordClock2.jpg?raw=true "Title")
 
@@ -6,11 +6,11 @@
 <br/>
 
 ## Contents 
- 1. [Features](#features) - Clock features
- 2. [Components](#components) - Components used to make the clock
- 3. [Circuit](#circuit) - Circuit and wiring diagram for clock electronics
- 4. [Fabrication Process](#fabrication-process-step-by-step) - guide of build process.
- 5. [Setting the time and date via Bluetooth](#bluetooth-guide-to-follow) 
+ 1. [Features](#features) - WordClock features.
+ 2. [Components](#components) - Components used to make the clock.
+ 3. [Circuit](#circuit) - Circuit and wiring diagram for the clock's electronics
+ 4. [Fabrication Process](#fabrication-process-step-by-step) - Guide for the clock's build process.
+ 5. [Setting the time and date](#setting-the-time-and-date-via-bluetooth-app) - How to set time and date via Bluetooth terminal app.   
 
 &nbsp;
 
@@ -261,6 +261,50 @@ https://github.com/mattudakis/ArduinoLEDClock/blob/12852df04a07dd08134136e3b3129
 &nbsp;
 
 
-## Bluetooth guide to follow
+## Setting the time and date via Bluetooth app
 
+The clock should keep good time and automatically alter the time for daylight saving changes. However if the time and date needs to be changed it can be done so via Bluetooth. The following instructions will outline how to do this.
+
+&nbsp;
+
+**1. Download a Blueooth terminal app onto a smartphone/tablet** 
+
+To talk to the clock via Bluetooth a bluetooth (BLE) terminal is needed. 
+
+- The following apps which have been tested and can be downloaded on the iOS app store or android's Goggle Play app store.
+- iOS devices "BLE Terminal HM-10" app.
+- Android devices "BLE Terminal" app.
+
+&nbsp; <img src="img/IMG_settimeiOS.JPG" width="281" height="535"> &nbsp;&nbsp; <img src="img/IMG_settimeandriod.JPG" width="281" height="535"> 
+
+&nbsp;
  
+**2. Connect to the WordClock** 
+
+- Once opened, the app should search for Bluetooth devices.
+- Select the clock's bluetooth connection which should be named "WordClock".
+- Once connected, make sure the settings are as shown in the image below.
+- To access the sttings long press on the "send ASCII" button for a few seconds. 
+
+&nbsp; <img src="img/IMG_settime.PNG" width="281" height="547"> &nbsp;&nbsp; <img src="img/IMG_settimesettings.JPG" width="281" height="547"> 
+
+&nbsp;
+
+**3. Send the "settime" command** 
+
+- Type the command `settime` and press the "send ASCII" button. 
+- The terminal should respond the message shown in the image below. 
+
+&nbsp; <img src="img/IMG_settime1.PNG" width="281" height="575"> &nbsp;&nbsp; <img src="img/IMG_settime2.PNG" width="281" height="575"> 
+
+&nbsp;
+
+**4. Send the new time and date**
+
+- Type out the current time and date in the following format: hh,mm,ss,dd,mm,yyyy corresponding to hour,minute,seconds,day,month,year.
+- The values should have a comma, slash or colon between them. 
+- Press the "send ASCII" button to set the time and date 
+- If the time is set correctly a message will be shown as seen in the image below.
+
+&nbsp; <img src="img/IMG_settime3.PNG" width="281" height="572"> &nbsp;&nbsp; <img src="img/IMG_settime4.PNG" width="281" height="572"> 
+
