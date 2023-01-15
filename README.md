@@ -1,4 +1,4 @@
-# Arduino based LED WordClock
+# Arduino based LED word clock
 
 ![Alt text](img/WordClock2.jpg?raw=true "Title")
 
