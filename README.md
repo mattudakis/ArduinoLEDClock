@@ -44,7 +44,7 @@ On the hour and quarter hour animations
 |LED dividers	        | Dividers to isolate LED light            | online laser cutting services    | 1.5mm backing board | 1         |  
 |LED array template     | Card template to attach LED strips       | online laser cutting services    | 1.5mm backing board | 1         |
 |MDF board	        | 230 x 230 x3mm for back of clock         | Hardware store/ online	      | 3mm thickness	    | 1	        | 
-|LED strip              | addressable LEDs 60/meter 16.5mm interval | Amazon/AliExpress                | 60 IP30, WS2812BECO | 121 LEDs  |  
+|LED strip              | addressable LEDs 60/meter 16.5mm interval | Amazon/AliExpress                | 60 IP30, WS2812B | 121 LEDs  |  
 |Arduino nano           | Arduino/Elegoo nano                      | Amazon/AliExpress	              | ATmega328P	    | 1         |
 |Real time clock (RTC)  | RTC with battery to keep time            | Amazon/AliExpress	              | DS3231		    | 1         |
 |Bluetooth BLE module   | BLE Bluetooth for remote connection       | Amazon/AliExpress	              | HM-10		    | 1         |
