@@ -100,6 +100,7 @@ The assembly process involves the following steps
 - Cut out a piece of baking paper the same size as the clock face and place on top of the clock. 
 > This will diffuse the LED light to evenly light each letter. 
 - Assemble the dividers and place on top of the baking paper/ clock face. 
+  - There should be 20 of the smaller divider unit, and 2 each of the longer divider units
 
 ![Alt text](img/Frame_essemble.jpg?raw=true "Title")
 
