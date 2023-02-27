@@ -227,7 +227,7 @@ https://github.com/mattudakis/ArduinoLEDClock/blob/d9e799738dbfbd42c72308ac00267
 
 - Uncomment the following lines of code changing the date and time to the correct values.
 
-https://github.com/mattudakis/ArduinoLEDClock/blob/12852df04a07dd08134136e3b312919e72e92018/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L103-L110
+https://github.com/mattudakis/ArduinoLEDClock/blob/18c88e38bfa34af2228499db180e15df1c73b24a/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L121-L124
 
 - Load this sketch onto the Arduino, this will set the time on the RTC. 
 - Re-comment out the above code in the sketch and reload to the Arduino. This is important otherwise the time will reset every power cycle.
@@ -242,7 +242,7 @@ https://github.com/mattudakis/ArduinoLEDClock/blob/12852df04a07dd08134136e3b3129
 - The clock will light up a 'Happy Birthday' message on set dates.
 - To set the dates edit the following code in the [clock sketch.](Arduino_sketches/WordClock_Main/WordClock_Main.ino)
 
-https://github.com/mattudakis/ArduinoLEDClock/blob/12852df04a07dd08134136e3b312919e72e92018/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L219-L228
+https://github.com/mattudakis/ArduinoLEDClock/blob/18c88e38bfa34af2228499db180e15df1c73b24a/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L237-L243
 
 - Change the month and day value and add additional dates with an additional or `||` statement.
 - If you'd prefer not to have a Birthday message show, this section of code can be commented out.
