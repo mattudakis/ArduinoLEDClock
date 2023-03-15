@@ -13,10 +13,10 @@ FASTLED_USING_NAMESPACE
 #define NUM_LEDS        121
 #define PHOTO_RESISTOR  A0
 #define BUTTON_PIN      2
-#define SET_TIME = "settime";
-#define ADD_BDAY = "addbday";
-#define REMOVE_BDAY = "removebday";
-#define LIST_BDAY = "listbday";
+#define SET_TIME       "settime"
+#define ADD_BDAY       "addbday"
+#define REMOVE_BDAY    "removebday"
+#define LIST_BDAY      "listbday"
 
 CRGB leds[NUM_LEDS];
 SoftwareSerial BT(8, 9); //  pin D8 to RXD p-in D9 purple to TXD
@@ -30,7 +30,6 @@ uint8_t gHue = 0; // rotating "base color" used by many of the patterns
 
 const byte numChars = 35;
 char receivedData[numChars];   // an array to store the received data
-
 boolean changingTime = false;
 boolean addingBday = false;
 boolean removingBday = false;
@@ -395,45 +394,48 @@ void bluetoothGetInput() { //take the message set by bluetooth and then add all 
       receivedData[ndx] = '\0'; // terminate the string
       ndx = 0;
       newData = true;
+
+      Serial.print("data: ");
+      Serial.println(receivedData);
     }
   }
 }
 
 void bluetoothCheckInput() { //If the message sent is the same as the trigger word "settime" then ask for user to enter date and time
-  if (newData == true && (strcasecmp(SET_TIME,receivedData) == 0) {
+  if (newData == true && (strcasecmp(SET_TIME,receivedData) == 0)) {
     BT.println("Set the Time & Date as: hh,mm,ss,dd,mm,yyyy");
     newData = false;
     changingTime = true; // set a switch to true that time is going to be changed
   }
   
-  if (newData == true && (strcasecmp(ADD_BDAY,receivedData) == 0){
+  if (newData == true && (strcasecmp(ADD_BDAY,receivedData) == 0)){
     newData = false;
     addingBday = true; // set a switch to true that time is going to be changed
   }
   
-  if (newData == true && (strcasecmp(REMOVE_BDAY,receivedData) == 0){
+  if (newData == true && (strcasecmp(REMOVE_BDAY,receivedData) == 0)){
     newData = false;
     removingBday = true; // set a switch to true that time is going to be changed
   }
 
-  if (newData == true && (strcasecmp(LIST_BDAY,receivedData) == 0){
+  if (newData == true && (strcasecmp(LIST_BDAY,receivedData) == 0)){
     newData = false;
     listingBday = true; // set a switch to true that time is going to be changed
   }
   
   if (newData == true && 
-      strcasecmp(SET_TIME,receivedData) != 0 && changingTime == false) &&
-      strcasecmp(ADD_BDAY,receivedData) != 0 && addingBday == false) &&
-      strcasecmp(REMOVE_BDAY,receivedData) != 0 && removingBday == false) &&
+      strcasecmp(SET_TIME,receivedData) != 0 && changingTime == false &&
+      strcasecmp(ADD_BDAY,receivedData) != 0 && addingBday == false &&
+      strcasecmp(REMOVE_BDAY,receivedData) != 0 && removingBday == false &&
       strcasecmp(LIST_BDAY,receivedData) != 0 && listingBday == false) {
-    newData = false;
-    String Cmd = (String)"Command not recognised ("+ a + ")"; // if the user input isnt same as trigger word then inform user command not recognised
-    BT.println(String("Command not recognised: ") + String(recievedData));
-    BT.println(String("Avaliable commands: ");
-    BT.println(String(SET_TIME));
-    BT.println(String(ADD_BDAY));
-    BT.println(String(REMOVE_BDAY));
-    BT.println(String(LIST_BDAY));
+      newData = false;
+      // if the user input isnt same as trigger word then inform user command not recognised
+      BT.println(String("Command not recognised: ") + String(receivedData));
+      BT.println(String("Avaliable commands: "));
+      BT.println(String(SET_TIME));
+      BT.println(String(ADD_BDAY));
+      BT.println(String(REMOVE_BDAY));
+      BT.println(String(LIST_BDAY));
   }
 }
 
@@ -451,12 +453,12 @@ void bluetoothCheckInput() { //If the message sent is the same as the trigger wo
         ptr = strtok(NULL, " :/,.");  // takes a list of delimiters
     }
   
-    long hr = atol(strings[0]); // take the parsed date from array which corresponds to hour minute seconds ect. 
-    long mm = atol(strings[1]);
-    long ss = atol(strings[2]);
-    long dd = atol(strings[3]);
-    long mth = atol(strings[4]);
-    long yyyy = atol(strings[5]);
+    int hr = atol(strings[0]); // take the parsed date from array which corresponds to hour minute seconds ect. 
+    int mm = atol(strings[1]);
+    int ss = atol(strings[2]);
+    int dd = atol(strings[3]);
+    int mth = atol(strings[4]);
+    int yyyy = atol(strings[5]);
   
     setTime(hr,mm,ss,dd,mth,yyyy);   //this sets the system time set to GMT without the daylight saving added. 
     RTC.set(now());
