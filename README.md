@@ -80,6 +80,14 @@ PCB files found [here](CustomPCB/)
 
 ![Alt text](img/WordClock_Schematic.jpg?raw=true "Title")
 
+&nbsp;
+
+ #### Optional full size PCB with pre-assembled LEDs
+ A large PCB with the addressable LEDs can be fabricated and pre-assembled.  
+ This will save a lot of time in the soldering of the LED strips.  
+ **Full sized PCB files and pictures of assembled PCB can be found [here](LEDPCB/)**  
+ 
+ <img src="LEDPCB/PCB_LED_top.png" width="500"> <img src="LEDPCB/PCB_LED_bottom.png" width="500">
 
 &nbsp;
 
