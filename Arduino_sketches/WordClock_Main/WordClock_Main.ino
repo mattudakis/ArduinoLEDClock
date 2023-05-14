@@ -4,19 +4,16 @@
 #include <FastLED.h>
 #include <DS3232RTC.h>      // https://github.com/JChristensen/DS3232RTC
 #include <SoftwareSerial.h>
+#include <EEPROM.h>
 
 FASTLED_USING_NAMESPACE
 
 #define DATA_PIN        6
-#define LED_TYPE        WS2811
+#define LED_TYPE        WS2812
 #define COLOR_ORDER     GRB
 #define NUM_LEDS        121
 #define PHOTO_RESISTOR  A0
 #define BUTTON_PIN      2
-#define SET_TIME       "settime"
-#define ADD_BDAY       "addbday"
-#define REMOVE_BDAY    "removebday"
-#define LIST_BDAY      "listbday"
 
 CRGB leds[NUM_LEDS];
 SoftwareSerial BT(8, 9); //  pin D8 to RXD p-in D9 purple to TXD
@@ -115,12 +112,18 @@ void setup() {
   FastLED.addLeds<LED_TYPE,DATA_PIN,COLOR_ORDER>(leds, NUM_LEDS).setCorrection(TypicalLEDStrip);
     
 //RTC Clock settings
+  RTC.begin();
   setSyncProvider(RTC.get);   // the function to get the time from the RTC
-
   //****settings to edit the time on the real time clock ******
-//setTime(12,59, 55, 05, 01, 2020);   //this sets the system time set to GMT without the daylight saving added. 
+//setTime(18,50, 00, 14, 05, 2023);   //this sets the system time set to GMT without the daylight saving added. 
 //RTC.set(now());   //sets time onto the RTC. Make sure to comment this out and then re-upload after setting the RTC. -- (setTime() and now() are Part of the Time Library)
   //**** Un-comment above 2 lines to set the time and load onto chip then comment out the lines and re-load onto the chip********
+
+
+  // **** comment this out after this sketch is uploaded for the first time ****
+  // **** it stores the number of birthdays stored in the EEPROM
+//EEPROM.write(0, 0);
+
 
 BT.begin(9600);
 BT.println("Connected to WordClock");
@@ -133,6 +136,8 @@ void loop() {
   bluetoothGetInput();
   bluetoothCheckInput();
   bluetoothChangeTime();
+  bluetoothAddBirthday();
+  bluetoothRemoveBirthday();
   
   // run the Clock face LEDs every 500ms
   unsigned long currentMillis = millis();
@@ -234,11 +239,20 @@ void Clockset(){
     
     
     //*************** light up the Happy birthday on birthdays ******************
-    
-    if(month() == 1 && day() ==6 || month() == 2 && day() ==14){
-      lightBirthdayLEDs(HAPPY);
-      lightBirthdayLEDs(BIRTHDAY);
-      FastLED.show();
+    int birthdayCount = EEPROM.read(0);
+    int birthdayAddress = 1;
+
+    for (int i = 0; i < birthdayCount; i++) {
+      int bdayDay = EEPROM.read(birthdayAddress);
+      int bdayMonth = EEPROM.read(birthdayAddress + 1);
+      
+      if(month() == bdayMonth && day() ==bdayDay) {
+        lightBirthdayLEDs(HAPPY);
+        lightBirthdayLEDs(BIRTHDAY);
+        FastLED.show();
+      }
+      
+      birthdayAddress += 2;
     }
     
     FastLED.show();
@@ -394,48 +408,103 @@ void bluetoothGetInput() { //take the message set by bluetooth and then add all 
       receivedData[ndx] = '\0'; // terminate the string
       ndx = 0;
       newData = true;
-
-      Serial.print("data: ");
-      Serial.println(receivedData);
     }
   }
 }
 
 void bluetoothCheckInput() { //If the message sent is the same as the trigger word "settime" then ask for user to enter date and time
-  if (newData == true && (strcasecmp(SET_TIME,receivedData) == 0)) {
+  if (newData == true && (strcasecmp("settime",receivedData) == 0)) {
+    BT.println();
     BT.println("Set the Time & Date as: hh,mm,ss,dd,mm,yyyy");
     newData = false;
     changingTime = true; // set a switch to true that time is going to be changed
   }
   
-  if (newData == true && (strcasecmp(ADD_BDAY,receivedData) == 0)){
+  if (newData == true && (strcasecmp("addbday",receivedData) == 0)){
+    BT.println();
+    BT.println("Enter birthday to add as: dd/mm");
     newData = false;
     addingBday = true; // set a switch to true that time is going to be changed
   }
   
-  if (newData == true && (strcasecmp(REMOVE_BDAY,receivedData) == 0)){
+  if (newData == true && (strcasecmp("removebday",receivedData) == 0)){
+    BT.println();
+    BT.println("Enter birthday to remove as: dd/mm");
     newData = false;
     removingBday = true; // set a switch to true that time is going to be changed
   }
 
-  if (newData == true && (strcasecmp(LIST_BDAY,receivedData) == 0)){
+  if (newData && strcasecmp("gettime", receivedData) == 0) {
+    char hoursString[3];
+    char minutesString[3];
+    char secondsString[3];
+    
+    BT.println();
+    BT.print("Date: ");
+    BT.print(day());
+    BT.print("/");
+    BT.print(month());
+    BT.print("/");
+    BT.println(year());
+
+    sprintf(hoursString, "%02d", hour());
+    sprintf(minutesString, "%02d", minute());
+    sprintf(secondsString, "%02d", second());
+    
+    BT.print("Time: ");
+    BT.print(hoursString);
+    BT.print(":");
+    BT.print(minutesString);
+    BT.print(":");
+    BT.println(secondsString);
+
     newData = false;
-    listingBday = true; // set a switch to true that time is going to be changed
   }
+
+  if (newData && strcasecmp("listbday", receivedData) == 0) {
+      int birthdayCount = EEPROM.read(0);
+      int birthdayAddress = 1;
+  
+      if (birthdayCount == 0) {
+        BT.println();
+        BT.print("Birthday count: ");
+        BT.println(birthdayCount);
+      } else {
+        BT.println();
+        for (int i = 0; i < birthdayCount; i++) {
+          int bdayMonth = EEPROM.read(birthdayAddress);
+          int bdayDay = EEPROM.read(birthdayAddress + 1);
+    
+          BT.print("Birthday ");
+          BT.print(i + 1);
+          BT.print(": ");
+          BT.print(bdayMonth);
+          BT.print("/");
+          BT.println(bdayDay);
+          
+          birthdayAddress += 2;
+        }
+      }
+      
+      newData = false;
+    }
   
   if (newData == true && 
-      strcasecmp(SET_TIME,receivedData) != 0 && changingTime == false &&
-      strcasecmp(ADD_BDAY,receivedData) != 0 && addingBday == false &&
-      strcasecmp(REMOVE_BDAY,receivedData) != 0 && removingBday == false &&
-      strcasecmp(LIST_BDAY,receivedData) != 0 && listingBday == false) {
+      strcasecmp("settime",receivedData) != 0 && changingTime == false &&
+      strcasecmp("addbday",receivedData) != 0 && addingBday == false &&
+      strcasecmp("removebday",receivedData) != 0 && removingBday == false &&
+      strcasecmp("listbday",receivedData) != 0 && listingBday == false) {
       newData = false;
       // if the user input isnt same as trigger word then inform user command not recognised
-      BT.println(String("Command not recognised: ") + String(receivedData));
-      BT.println(String("Avaliable commands: "));
-      BT.println(String(SET_TIME));
-      BT.println(String(ADD_BDAY));
-      BT.println(String(REMOVE_BDAY));
-      BT.println(String(LIST_BDAY));
+      BT.println();
+      BT.println("Command not recognised: " + String(receivedData));
+      BT.println("Avaliable commands: ");
+      BT.println("settime");
+      BT.println("gettime");
+      BT.println("addbday");
+      BT.println("removebday");
+      BT.println("listbday");
+      
   }
 }
 
@@ -452,27 +521,127 @@ void bluetoothCheckInput() { //If the message sent is the same as the trigger wo
         index++;
         ptr = strtok(NULL, " :/,.");  // takes a list of delimiters
     }
-  
-    int hr = atol(strings[0]); // take the parsed date from array which corresponds to hour minute seconds ect. 
-    int mm = atol(strings[1]);
-    int ss = atol(strings[2]);
-    int dd = atol(strings[3]);
-    int mth = atol(strings[4]);
-    int yyyy = atol(strings[5]);
-  
+    long hr = atol(strings[0]); // take the parsed date from array which corresponds to hour minute seconds ect. 
+    long mm = atol(strings[1]);
+    long ss = atol(strings[2]);
+    long dd = atol(strings[3]);
+    long mth = atol(strings[4]);
+    long yyyy = atol(strings[5]);
+
+    
     setTime(hr,mm,ss,dd,mth,yyyy);   //this sets the system time set to GMT without the daylight saving added. 
     RTC.set(now());
     
-    String Dateset =  (String)dd+"/"+mth+"/"+yyyy;  //create a string to update user interface to bluetooth 
-    String Timeset = (String)hr+":"+mm+":"+ss;
+    BT.print("Date set as: ");
+    BT.print(dd);
+    BT.print("/");
+    BT.print(mth);
+    BT.print("/");
+    BT.println(yyyy);
+
+    //sprintf(hoursString, "%02d", hours);
+    //sprintf(minutesString, "%02d", minutes);
+    //sprintf(secondsString, "%02d", seconds);
     
-    BT.println("Time set as: " + Timeset);
-    BT.println("Date set as: " + Dateset);
+    BT.print("Time set as: ");
+    BT.print(hr);
+    BT.print(":");
+    BT.print(mm);
+    BT.print(":");
+    BT.print(ss);
+    BT.println(" ");
         
     newData = false;
     changingTime = false;
   }
 }
 
+void bluetoothAddBirthday()  {
+  if (newData == true && addingBday) {
+    char *ptr = strtok(receivedData, "/");
+    int month = -1;
+    int day = -1;
+
+    if (ptr) {
+      day = atoi(ptr);
+      ptr = strtok(NULL, "/");
+
+      if (ptr) {
+        month = atoi(ptr);
+      }
+    }
+
+    if (month >= 1 && month <= 12 && day >= 1 && day <= 31) {
+      int birthdayCount = EEPROM.read(0);
+
+      int birthdayAddress = (birthdayCount * 2) + 1;
+
+      EEPROM.write(birthdayAddress, day);
+      EEPROM.write(birthdayAddress + 1, month);
+      EEPROM.write(0, birthdayCount + 1);
+    
+      BT.print("Added birthday: ");
+      BT.print(day);
+      BT.print("/");
+      BT.println(month);
+    } else {
+      BT.print("Invalid birthday: ");
+      BT.print(String(receivedData));
+    }
+    
+    newData = false;
+    addingBday = false;
+  }
+}
+
+
+void bluetoothRemoveBirthday()  {
+  if (newData == true && removingBday) {
+    char *ptr = strtok(receivedData, "/");
+    int month = -1;
+    int day = -1;
+
+    if (ptr) {
+      day = atoi(ptr);
+      ptr = strtok(NULL, "/");
+
+      if (ptr) {
+        month = atoi(ptr);
+      }
+    }
+
+    if (month >= 1 && month <= 12 && day >= 1 && day <= 31) {
+      int birthdayCount = EEPROM.read(0);
+      int birthdayAddress = 1;
+      bool birthdayFound = false;
+
+      for (int i = 0; i < birthdayCount; i++) {
+        if (birthdayFound) {
+          EEPROM.write(birthdayAddress - 2, EEPROM.read(birthdayAddress));
+          EEPROM.write(birthdayAddress - 1, EEPROM.read(birthdayAddress + 1));
+        } else if (EEPROM.read(birthdayAddress) == day && EEPROM.read(birthdayAddress + 1) == month) {
+          birthdayFound = true;
+        }
+
+        birthdayAddress += 2;
+      }
+
+      if (birthdayFound) {
+        EEPROM.write(0, birthdayCount - 1);
+      
+        BT.print("Removed birthday: ");
+        BT.print(day);
+        BT.print("/");
+        BT.println(month);
+      } else {
+        BT.print("Birthday not found: ");
+        BT.print(String(receivedData));
+      }
+    }
+    
+    newData = false;
+    removingBday = false;
+  }
+}
 // TO ADD setting the bday and saving it to the eprom memory
     
