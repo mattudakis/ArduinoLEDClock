@@ -87,7 +87,7 @@ PCB files found [here](CustomPCB/)
  This will save a lot of time in the soldering of the LED strips.  
  **Full sized PCB files and pictures of assembled PCB can be found [here](LEDPCB/)**  
  
- <img src="LEDPCB/PCB_LED_top.png" width="400"> <img src="LEDPCB/PCB_LED_bottom.png" width="400">
+ <img src="LEDPCB/PCB_LED_top.svg" width="400"> <img src="LEDPCB/PCB_LED_bottom.svg" width="400">
 
 &nbsp;
 
