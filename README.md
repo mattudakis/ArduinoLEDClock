@@ -235,7 +235,8 @@ https://github.com/mattudakis/ArduinoLEDClock/blob/d9e799738dbfbd42c72308ac00267
 
 - Uncomment the following lines of code changing the date and time to the correct values.
 
-https://github.com/mattudakis/ArduinoLEDClock/blob/c3e4230201448f99df231de48d5bf802a1313d0f/Arduino_sketches/WordClock_Main/WordClock_Main.ino#LL117C1-L121C1
+https://github.com/mattudakis/ArduinoLEDClock/blob/16a55efdb6801a090051829981d1c424cf0cc2de/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L117-L120  
+
 
 - Load this sketch onto the Arduino, this will set the time on the RTC. 
 - Re-comment out the above code in the sketch and reload to the Arduino. This is important otherwise the time will reset every power cycle.
