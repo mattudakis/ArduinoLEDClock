@@ -126,7 +126,7 @@ void setup() {
 
 // **** to add birthdates without bluetooth use this code, 
 // **** comment this out after loding for the first time
-//add_manual_bday(6, 1) // pass the variables (day, month) 
+//addManualBday(6, 1) // pass the variables (day, month) 
 
 
 BT.begin(9600);

@@ -287,9 +287,6 @@ However if the time and date needs to be changed or you want to add or remove bi
 to light up this can be done via Bluetooth. 
 The following instructions will outline how to do this.
 
- 
-
-For this to work we need to download a bluetooth (BLE) terminal app. 
 
 &nbsp;
 
@@ -332,7 +329,7 @@ To talk to the clock via Bluetooth a bluetooth (BLE) terminal app is needed.
 
 &nbsp;
 
-** Setting the time and date**
+**Setting the time and date**
 
 - Send the `settime` command and wait for a response 
 - Type out the current time and date in the following format: hh,mm,ss,dd,mm,yyyy corresponding to hour,minutes,seconds,day,month,year.
@@ -344,7 +341,7 @@ To talk to the clock via Bluetooth a bluetooth (BLE) terminal app is needed.
 
 &nbsp;
 
-** Adding a new birthday **
+**Adding a new birthday**
 
 - Send the `addbday` command
 - Type the birthday to be added as dd/mm (day/month)
@@ -353,7 +350,7 @@ To talk to the clock via Bluetooth a bluetooth (BLE) terminal app is needed.
 
 &nbsp;
 
-** Removing a birthday **
+**Removing a birthday**
 
 - Send the `removebday` command
 - Type the birthday to be removed as dd/mm (day/month) note: it might help to list the birdays first with the `listbday` command
