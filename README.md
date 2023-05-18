@@ -235,11 +235,11 @@ https://github.com/mattudakis/ArduinoLEDClock/blob/d9e799738dbfbd42c72308ac00267
 
 - Uncomment the following lines of code changing the date and time to the correct values.
 
-https://github.com/mattudakis/ArduinoLEDClock/blob/18c88e38bfa34af2228499db180e15df1c73b24a/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L121-L124
+https://github.com/mattudakis/ArduinoLEDClock/blob/c3e4230201448f99df231de48d5bf802a1313d0f/Arduino_sketches/WordClock_Main/WordClock_Main.ino#LL117C1-L121C1
 
 - Load this sketch onto the Arduino, this will set the time on the RTC. 
 - Re-comment out the above code in the sketch and reload to the Arduino. This is important otherwise the time will reset every power cycle.
-- The time/ date can be changed remotley in the future via Bluetooth, using these [guides](#Setting-the-time,-date-and-birthdays-via-Bluetooth-app) 
+- The time/ date can be changed remotley in the future via Bluetooth, using these [guides](#Using-Bluetooth-to-set-the-time/date-and-add/remove-birthdays) 
 
 
 &nbsp;
@@ -247,7 +247,7 @@ https://github.com/mattudakis/ArduinoLEDClock/blob/18c88e38bfa34af2228499db180e1
 
 **Clearing the EPROM memory**
 
-The arduino can store birthdates in its "eprom" memory, to allow this to work the first time make sure the line `EEPROM.write(0, 0);` is uncommented
+The arduino can store birthdates in its "eprom" memory, to allow this to work the first time make sure the line [`EEPROM.write(0, 0);`](https://github.com/mattudakis/ArduinoLEDClock/blob/c3e4230201448f99df231de48d5bf802a1313d0f/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L125) is uncommented
 this will clear the eprom memory to allow birthdays to be stored. After loading the sketch for the first time, re-comment this line and re-load the sketch.
 
 
@@ -258,10 +258,10 @@ this will clear the eprom memory to allow birthdays to be stored. After loading 
 **Altering the dates for birthdays in the clock sketch**
 
 - The clock will light up a 'Happy Birthday' message on set dates.
-- You can set these dates via Bluetooth [see here](#Setting-the-time,-date-and-birthdays-via-Bluetooth-app) 
+- You can set these dates via Bluetooth [see here](#Using-Bluetooth-to-set-the-time/date-and-add/remove-birthdays) 
 - To set the dates directly in the sketch edit the following code in the [clock sketch.](Arduino_sketches/WordClock_Main/WordClock_Main.ino)
 
-https://github.com/mattudakis/ArduinoLEDClock/blob/18c88e38bfa34af2228499db180e15df1c73b24a/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L237-L243
+https://github.com/mattudakis/ArduinoLEDClock/blob/c3e4230201448f99df231de48d5bf802a1313d0f/Arduino_sketches/WordClock_Main/WordClock_Main.ino#LL127C1-L129C58
 
 - Change the day and month value in the `addManualBday()` function, you can copy and paste this line of code to add additional birthdates.
 - after loading this onto the arduino, make sure to comment this line out and reload the sketch to prevent it writting a new birthday after each power cycle.
@@ -280,7 +280,7 @@ https://github.com/mattudakis/ArduinoLEDClock/blob/18c88e38bfa34af2228499db180e1
 &nbsp;
 
 
-## Setting the time, date and birthdays via Bluetooth app
+## Using Bluetooth to set the time/date and add/remove birthdays
 
 The clock should keep good time and automatically alter the time for daylight saving changes. 
 However if the time and date needs to be changed or you want to add or remove birthdates 
