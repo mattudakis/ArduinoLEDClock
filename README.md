@@ -262,7 +262,8 @@ this will clear the eprom memory to allow birthdays to be stored. After loading 
 - You can set these dates via Bluetooth [see here](#Using-Bluetooth-to-set-the-time/date-and-add/remove-birthdays) 
 - To set the dates directly in the sketch edit the following code in the [clock sketch.](Arduino_sketches/WordClock_Main/WordClock_Main.ino)
 
-https://github.com/mattudakis/ArduinoLEDClock/blob/c3e4230201448f99df231de48d5bf802a1313d0f/Arduino_sketches/WordClock_Main/WordClock_Main.ino#LL127C1-L129C58  
+https://github.com/mattudakis/ArduinoLEDClock/blob/16a55efdb6801a090051829981d1c424cf0cc2de/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L127-L129  
+
 
 - Change the day and month value in the `addManualBday()` function, you can copy and paste this line of code to add additional birthdates.
 - after loading this onto the arduino, make sure to comment this line out and reload the sketch to prevent it writting a new birthday after each power cycle.
