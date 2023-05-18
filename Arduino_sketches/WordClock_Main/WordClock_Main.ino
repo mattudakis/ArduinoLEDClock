@@ -124,6 +124,10 @@ void setup() {
   // **** it stores the number of birthdays stored in the EEPROM
 //EEPROM.write(0, 0);
 
+// **** to add birthdates without bluetooth use this code, 
+// **** comment this out after loding for the first time
+//add_manual_bday(6, 1) // pass the variables (day, month) 
+
 
 BT.begin(9600);
 BT.println("Connected to WordClock");
@@ -643,5 +647,15 @@ void bluetoothRemoveBirthday()  {
     removingBday = false;
   }
 }
-// TO ADD setting the bday and saving it to the eprom memory
+
+
+void add_manual_bday(int day, int month) {
+      int birthdayCount = EEPROM.read(0);
+      int birthdayAddress = (birthdayCount * 2) + 1;
+
+      EEPROM.write(birthdayAddress, day);
+      EEPROM.write(birthdayAddress + 1, month);
+      EEPROM.write(0, birthdayCount + 1);
+
+}
     

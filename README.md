@@ -239,21 +239,32 @@ https://github.com/mattudakis/ArduinoLEDClock/blob/18c88e38bfa34af2228499db180e1
 
 - Load this sketch onto the Arduino, this will set the time on the RTC. 
 - Re-comment out the above code in the sketch and reload to the Arduino. This is important otherwise the time will reset every power cycle.
-- The time/ date can be changed remotley in the future via Bluetooth, using these [guides](#bluetooth-guide-to-follow) 
+- The time/ date can be changed remotley in the future via Bluetooth, using these [guides](#Setting-the-time,-date-and-birthdays-via-Bluetooth-app) 
 
 
 &nbsp;
 
 
+**Clearing the EPROM memory**
+
+The arduino can store birthdates in its "eprom" memory, to allow this to work the first time make sure the line `EEPROM.write(0, 0);` is uncommented
+this will clear the eprom memory to allow birthdays to be stored. After loading the sketch for the first time, re-comment this line and re-load the sketch.
+
+
+&nbsp;
+
+
+
 **Altering the dates for birthdays in the clock sketch**
 
 - The clock will light up a 'Happy Birthday' message on set dates.
-- To set the dates edit the following code in the [clock sketch.](Arduino_sketches/WordClock_Main/WordClock_Main.ino)
+- You can set these dates via Bluetooth [see here](#Setting-the-time,-date-and-birthdays-via-Bluetooth-app) 
+- To set the dates directly in the sketch edit the following code in the [clock sketch.](Arduino_sketches/WordClock_Main/WordClock_Main.ino)
 
 https://github.com/mattudakis/ArduinoLEDClock/blob/18c88e38bfa34af2228499db180e15df1c73b24a/Arduino_sketches/WordClock_Main/WordClock_Main.ino#L237-L243
 
-- Change the month and day value and add additional dates with an additional or `||` statement.
-- If you'd prefer not to have a Birthday message show, this section of code can be commented out.
+- Change the day and month value in the `addManualBday()` function, you can copy and paste this line of code to add additional birthdates.
+- after loading this onto the arduino, make sure to comment this line out and reload the sketch to prevent it writting a new birthday after each power cycle.
 
 
 &nbsp;
@@ -269,9 +280,16 @@ https://github.com/mattudakis/ArduinoLEDClock/blob/18c88e38bfa34af2228499db180e1
 &nbsp;
 
 
-## Setting the time and date via Bluetooth app
+## Setting the time, date and birthdays via Bluetooth app
 
-The clock should keep good time and automatically alter the time for daylight saving changes. However if the time and date needs to be changed it can be done so via Bluetooth. The following instructions will outline how to do this.
+The clock should keep good time and automatically alter the time for daylight saving changes. 
+However if the time and date needs to be changed or you want to add or remove birthdates 
+to light up this can be done via Bluetooth. 
+The following instructions will outline how to do this.
+
+ 
+
+For this to work we need to download a bluetooth (BLE) terminal app. 
 
 &nbsp;
 
@@ -298,17 +316,25 @@ To talk to the clock via Bluetooth a bluetooth (BLE) terminal app is needed.
 
 &nbsp;
 
-**3. Send the "settime" command** 
+**3. Sending a command** 
 
-- Type the command `settime` and press the "send ASCII" button. 
-- The terminal should respond with the message shown in the image below. 
+- The clock takes five commands:
+	- `gettime` - to display the current date and time	
+	- `settime` - to set the date and time
+	- `listbday` - to list all the birthdates stored in memory
+	- `addbday` - to add a birthday to memory
+	- `removebday` - to remove a birthday  from memory
+
+- Type the command you want for example: `settime` and press the "send ASCII" button. 
+- The terminal should respond with the instruction as shown in the image below. 
 
 &nbsp; <img src="img/IMG_settime1.PNG" width="281" height="575"> &nbsp;&nbsp; <img src="img/IMG_settime2.PNG" width="281" height="575"> 
 
 &nbsp;
 
-**4. Send the new time and date**
+** Setting the time and date**
 
+- Send the `settime` command and wait for a response 
 - Type out the current time and date in the following format: hh,mm,ss,dd,mm,yyyy corresponding to hour,minutes,seconds,day,month,year.
 - The values should have a comma, slash or colon between them. 
 - Press the "send ASCII" button to set the time and date 
@@ -316,3 +342,21 @@ To talk to the clock via Bluetooth a bluetooth (BLE) terminal app is needed.
 
 &nbsp; <img src="img/IMG_settime3.PNG" width="281" height="572"> &nbsp;&nbsp; <img src="img/IMG_settime4.PNG" width="281" height="572"> 
 
+&nbsp;
+
+** Adding a new birthday **
+
+- Send the `addbday` command
+- Type the birthday to be added as dd/mm (day/month)
+- The value should have a slash between them. 
+- Press the "send ASCII" button to add the new bday
+
+&nbsp;
+
+** Removing a birthday **
+
+- Send the `removebday` command
+- Type the birthday to be removed as dd/mm (day/month) note: it might help to list the birdays first with the `listbday` command
+- The value should have a slash between them. 
+- Press the "send ASCII" button to remove the birthday
+ 
