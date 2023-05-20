@@ -1,4 +1,3 @@
-
 // code includes birthday messages and also automatic daylight saving calculations.
 
 #include <FastLED.h>
@@ -21,6 +20,7 @@ SoftwareSerial BT(8, 9); //  pin D8 to RXD p-in D9 purple to TXD
 //Global Variables
 uint8_t animate_speed = 100;
 uint8_t Hour_DST;
+int DST;
 uint8_t colour_hue = 35;
 uint8_t gHue = 0; // rotating "base color" used by many of the patterns
 
@@ -114,19 +114,19 @@ void setup() {
 //RTC Clock settings
   RTC.begin();
   setSyncProvider(RTC.get);   // the function to get the time from the RTC
+  
   //****settings to edit the time on the real time clock ******
-//setTime(18,50, 00, 14, 05, 2023);   //this sets the system time set to GMT without the daylight saving added. 
-//RTC.set(now());   //sets time onto the RTC. Make sure to comment this out and then re-upload after setting the RTC. -- (setTime() and now() are Part of the Time Library)
+//  setTime(18,50, 00, 14, 05, 2023);   //this sets the system time set to GMT without the daylight saving added. 
+//  RTC.set(now());   //sets time onto the RTC. Make sure to comment this out and then re-upload after setting the RTC. -- (setTime() and now() are Part of the Time Library)
   //**** Un-comment above 2 lines to set the time and load onto chip then comment out the lines and re-load onto the chip********
 
 
   // **** comment this out after this sketch is uploaded for the first time ****
   // **** it stores the number of birthdays stored in the EEPROM
-//EEPROM.write(0, 0);
+//  EEPROM.write(0, 0);
 
-// **** to add birthdates without bluetooth use this code, 
-// **** comment this out after loding for the first time
-//addManualBday(6, 1) // pass the variables (day, month) 
+// To add birthdates without bluetooth use this function, **** comment this out after loding for the first time ****
+//  addManualBday(26, 3); // pass the variables (day, month) 
 
 
 BT.begin(9600);
@@ -164,37 +164,37 @@ void loop() {
 
 
 void Clockset(){
-// ********************* Calculate offset for Daylight saving hours (UK) *********************
-  int y = year();                          // year in 4 digit format
-  uint8_t Mar_x = 31 - (4 + 5*y/4) % 7;      // will find the day of the last sunday in march
-  uint8_t Oct_x = 31 - (1 + 5*y/4) % 7;       // will find the day of the last sunday in Oct
-  uint8_t DST;
-                                             
-  // *********** Test DST: BEGINS on last Sunday of March @ 2:00 AM *********
-  if(month() == 3 && day() == Mar_x && hour() >= 2) {                                   
-      DST = 1;                           // Daylight Savings Time is TRUE (add one hour)
-     }
-     
-  if((month() == 3 && day() > Mar_x) || month() > 3) {
-      DST = 1;
-     }
-     
-  // ************* Test DST: ENDS on Last Sunday of Oct @ 2:00 AM ************  
-  if(month() == 10 && day() == Oct_x && hour() >= 2) {
-      DST = 0;                            // daylight savings time is FALSE (Standard time)
-     }
-     
-  if((month() == 10 && day() > Oct_x) || month() > 10 || month() < 3 || month() == 3 && day() < Mar_x || month() == 3 && day() == Mar_x && hour() < 2) {
-      DST = 0;
-     }
   
-  Hour_DST = hour()+DST; //Add the DST to the hour to get correct DST
+  // ********************* Calculate offset for Daylight saving hours UK/Europe *********************
+  // for UK/ Europe DST starts on last Sunday March at 2:00am until Last Sunday October at 2:00am
+  int MonthStartDST = 3; //dst starts in march
+  int MonthEndDST   = 10; //dst ends in october
+  int TimeDSTSwitch = 2; // clocks change at 2:00am
+  int y = year();
   
-  if(hour() == 23 && DST == 1) {
-    Hour_DST = 00;
-  }
+  int DayStartDST = calculateLastSundayInMonth(y, MonthStartDST); //find the last sunday in the month
+  int DayEndDST = calculateLastSundayInMonth(y, MonthEndDST); //find the last sunday in the month
+
+  SetDST(MonthStartDST, DayStartDST, MonthEndDST, DayEndDST, TimeDSTSwitch);
+
+
+
+  // ********************* Calculate offset for Daylight saving hours USA *********************
+//  // for USA DST starts on second Sunday March at 2:00am until First Sunday November at 2:00am
+//  int MonthStartDST = 3; //dst strats in march
+//  int MonthEndDST   = 11; //dst ends in october
+//  int TimeDSTSwitch = 2; // clocks change at 2:00am
+//  int y = year();
+//  
+//  int DayStartDST = calculateFirstSundayInMonth(y, MonthStartDST) + 7; // add 7 to get the second week of the month
+//  int DayEndDST = calculateFirstSundayInMonth(y, MonthEndDST);
+//
+//  SetDST(MonthStartDST, DayStartDST, MonthEndDST, DayEndDST, TimeDSTSwitch);
   
-  // ********************************************************************************
+  // *****************************************                                             
+
+  
+  
   // the first 8 seconds of the hour is a special animation if its past this time set time as normal
   
   if (minute() ==00  && second() > 8 || minute() >00)  {     
@@ -419,7 +419,7 @@ void bluetoothGetInput() { //take the message set by bluetooth and then add all 
 void bluetoothCheckInput() { //If the message sent is the same as the trigger word "settime" then ask for user to enter date and time
   if (newData == true && (strcasecmp("settime",receivedData) == 0)) {
     BT.println();
-    BT.println("Set the Time & Date as: hh,mm,ss,dd,mm,yyyy");
+    BT.println("Set the Time (without daylight savings time added) & Date as: hh,mm,ss,dd,mm,yyyy");
     newData = false;
     changingTime = true; // set a switch to true that time is going to be changed
   }
@@ -649,7 +649,7 @@ void bluetoothRemoveBirthday()  {
 }
 
 
-void add_manual_bday(int day, int month) {
+void addManualBday(int day, int month) {
       int birthdayCount = EEPROM.read(0);
       int birthdayAddress = (birthdayCount * 2) + 1;
 
@@ -658,4 +658,95 @@ void add_manual_bday(int day, int month) {
       EEPROM.write(0, birthdayCount + 1);
 
 }
+
+
+void SetDST(int MonthStartDST, int DayStartDST, int MonthEndDST, int DayEndDST, int TimeDSTSwitch) {
+  
+  // *********** Test if time is between DST start and end dates and set DST *********
+  if ((month() > MonthStartDST && month() < MonthEndDST) || (month() == MonthStartDST && day() >= DayStartDST) || (month() == MonthEndDST && day() <= DayEndDST)) {
+     // Check if the time is after 2am
+    DST = 1;
+    if (month() == MonthStartDST && day() == DayStartDST){
+        if (hour() < TimeDSTSwitch) {
+           DST = 0;
+        } else {
+         DST = 1; }
+    }
+    if (month() == MonthEndDST && day() == DayEndDST){
+      if (hour() < TimeDSTSwitch) {
+           DST = 1;
+        } else {
+         DST = 0; }
+    }
+  } else {
+  DST = 0;
+  }
+  
+  Hour_DST = hour()+DST; //Add the DST to the hour to get correct DST
+  
+  if(hour() == 23 && DST == 1) {
+    Hour_DST = 00;
+  }
+}
+
+
+// these two function use the Zeller Congruence to calculate the date of the Last or first sunday of a given month for a given year. 
+int calculateLastSundayInMonth(int year, int month) {
+  int d; // Number of days in the month
+  if (month == 2) {
+    // February
+    if ((year % 4 == 0 && year % 100 != 0) || year % 400 == 0) {
+      d = 29; // Leap year
+    } else {
+      d = 28; // Non-leap year
+    }
+  } else if (month == 4 || month == 6 || month == 9 || month == 11) {
+    // April, June, September, November
+    d = 30;
+  } else {
+    // January, March, May, July, August, October, December
+    d = 31;
+  }
+
+  int K = year % 100;
+  int J = year / 100;
+
+  int w = (d + 13 * (month + 1) / 5 + K + K / 4 + J / 4 + 5 * J) % 7;
+
+  int diff = w - 1; // Calculate the difference from 0 (Sunday)
+
+  int lastSunday = d - diff;
+
+  return lastSunday;
+}
+
+
+int calculateFirstSundayInMonth(int year, int month) {
+  if (month == 1) {
+    month = 13;
+    year = year - 1;
+  }
+
+  if (month == 2) {
+    month = 14;
+    year = year - 1;
+  }
+
+  int d = 1;
+  int K = year % 100;
+  int J = year / 100;
+
+  int w = (d + 13 * (month + 1) / 5 + K + K / 4 + J / 4 + 5 * J) % 7;
+  d = ((w + 5) % 7) + 1; // Convert so Monday=1, Sunday=7
+
+  int firstSunday;
+  if (d == 7) {
+    int firstSunday = 1;
+    } else  {
+     int firstSunday = 8 - d;
+      } 
+
+  return firstSunday;
+}
+
     
