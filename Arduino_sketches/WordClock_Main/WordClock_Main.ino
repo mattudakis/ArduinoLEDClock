@@ -8,7 +8,7 @@
 FASTLED_USING_NAMESPACE
 
 #define DATA_PIN        6
-#define LED_TYPE        WS2812
+#define LED_TYPE        WS2811
 #define COLOR_ORDER     GRB
 #define NUM_LEDS        121
 #define PHOTO_RESISTOR  A0
@@ -197,7 +197,7 @@ void Clockset(){
   
   // the first 8 seconds of the hour is a special animation if its past this time set time as normal
   
-  if (minute() ==00  && second() > 8 || minute() >00)  {     
+  if (minute() == 00  && second() > 8 || minute() > 00)  {     
     FastLED.clear (); // reset the LEDs prevents old times staying lit up 
     
     lightWordLEDs(ITS); // light up Its LEDs
@@ -316,10 +316,11 @@ void lightHourLEDs(uint8_t Hour) {
   }
 }
 
+
 void lightBirthdayLEDs(enum wordLEDs word) {
   for (uint8_t i = 0; i < wordLengths[word]; i++) {
-    leds[wordArray[word][i]] += CHSV( gHue+(i*10), 250, 200);
-    EVERY_N_MILLISECONDS( 10 ) { gHue++; } //change the colour of the animation
+    leds[wordArray[word][i]] += CHSV( gHue+(i*10), 250, 250);
+    EVERY_N_MILLISECONDS( 1000 ) { gHue++; } //change the colour of the animation
   }
 }
 
@@ -656,7 +657,6 @@ void addManualBday(int day, int month) {
       EEPROM.write(birthdayAddress, day);
       EEPROM.write(birthdayAddress + 1, month);
       EEPROM.write(0, birthdayCount + 1);
-
 }
 
 
@@ -712,9 +712,8 @@ int calculateLastSundayInMonth(int year, int month) {
   int J = year / 100;
 
   int w = (d + 13 * (month + 1) / 5 + K + K / 4 + J / 4 + 5 * J) % 7;
-
   int diff = w - 1; // Calculate the difference from 0 (Sunday)
-
+  
   int lastSunday = d - diff;
 
   return lastSunday;
@@ -726,7 +725,6 @@ int calculateFirstSundayInMonth(int year, int month) {
     month = 13;
     year = year - 1;
   }
-
   if (month == 2) {
     month = 14;
     year = year - 1;
