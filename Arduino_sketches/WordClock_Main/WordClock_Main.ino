@@ -380,12 +380,12 @@ void hourAnimation() {
 
 void brightnessSet () {
   int ambiant_Light = analogRead(PHOTO_RESISTOR);    // read the value of the photoresisor
-  int Brightness_Set = map(ambiant_Light, 0, 500, 10, 200); // map the ambiant light value to a LED brightness value
+  int Brightness_Set = map(ambiant_Light, 0, 400, 50, 250); // map the ambiant light value to a LED brightness value
   
-  if (ambiant_Light >= 500){ 
-    FastLED.setBrightness(200);
+  if (ambiant_Light >= 400){ 
+    FastLED.setBrightness(250);
   }
-  if (ambiant_Light < 500){
+  if (ambiant_Light < 400){
     FastLED.setBrightness(Brightness_Set);  // set the brightness of the LEDs
   }
 }
