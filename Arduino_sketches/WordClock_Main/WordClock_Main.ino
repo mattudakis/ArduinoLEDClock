@@ -114,24 +114,23 @@ void setup() {
 //RTC Clock settings
   RTC.begin();
   setSyncProvider(RTC.get);   // the function to get the time from the RTC
+
+// Bluetooth 
+  BT.begin(9600);
+  BT.println("Connected to WordClock");
+  BT.println("AT+NAMEWordClock_009");     // send the command AT+NAME[name] where [name] is the name for the bluetooth
   
   //****settings to edit the time on the real time clock ******
+  //**** Un-comment below 2 lines to set the time and load onto chip then comment out the lines and re-load onto the chip********
 //  setTime(18,50, 00, 14, 05, 2023);   //this sets the system time set to GMT without the daylight saving added. 
 //  RTC.set(now());   //sets time onto the RTC. Make sure to comment this out and then re-upload after setting the RTC. -- (setTime() and now() are Part of the Time Library)
-  //**** Un-comment above 2 lines to set the time and load onto chip then comment out the lines and re-load onto the chip********
-
-
+  
   // **** comment this out after this sketch is uploaded for the first time ****
   // **** it stores the number of birthdays stored in the EEPROM
 //  EEPROM.write(0, 0);
 
-// To add birthdates without bluetooth use this function, **** comment this out after loding for the first time ****
-//  addManualBday(26, 3); // pass the variables (day, month) 
-
-
-BT.begin(9600);
-BT.println("Connected to WordClock");
-    
+  // To add birthdates without bluetooth use this function, **** comment this out after loding for the first time ****
+//  addManualBday(26, 3); // pass the variables (day, month)    
 }
 
 
@@ -148,8 +147,7 @@ void loop() {
     
   if(currentMillis - previousMillis > interval) {
     // save the last time you blinked the LED 
-    previousMillis = currentMillis;
-       
+    previousMillis = currentMillis;   
     Clockset();
   }
   
@@ -178,7 +176,6 @@ void Clockset(){
   SetDST(MonthStartDST, DayStartDST, MonthEndDST, DayEndDST, TimeDSTSwitch);
 
 
-
   // ********************* Calculate offset for Daylight saving hours USA *********************
 //  // for USA DST starts on second Sunday March at 2:00am until First Sunday November at 2:00am
 //  int MonthStartDST = 3; //dst strats in march
@@ -193,8 +190,7 @@ void Clockset(){
   
   // *****************************************                                             
 
-  
-  
+   
   // the first 8 seconds of the hour is a special animation if its past this time set time as normal
   
   if (minute() == 00  && second() > 8 || minute() > 00)  {     
@@ -204,38 +200,30 @@ void Clockset(){
     
     if (minute() >= 5 && minute() < 10 || minute() >= 55 && minute() < 60) {
       lightWordLEDs(FIVE);    // if functions to set the time minutes
-    }
-    
+    }   
     if (minute() >= 10 && minute() < 15 || minute() >= 50 && minute() < 55) { 
       lightWordLEDs(TEN);
     }
-    
     if (minute() >= 15 && minute() < 20 || minute() >= 45 && minute() < 50 ) { 
       lightWordLEDs(QUARTER);
-    }
-    
+    }  
     if (minute() >= 20 && minute() < 25 || minute() >= 40 && minute() < 45) {
       lightWordLEDs(TWENTY);
-    }
-    
+    }   
     if (minute() >= 25 && minute() < 30 || minute() >= 35 && minute() < 40) {
       lightWordLEDs(TWENTY_FIVE);
-    }
-    
-    if (minute() >= 30 && minute() < 35){
+    }  
+    if (minute() >= 30 && minute() < 35) {
       lightWordLEDs(HALF);
-    }
-    
+    }   
     if (minute() >= 5 && minute() < 35) { // this sets the 'past' light so it only lights up for first 30 mins
       lightWordLEDs(PAST);
       lightHourLEDs(Hour_DST);
-    }
-    
+    } 
     if (minute() >= 35 && minute() < 60 && hour() <= 23) {
       lightWordLEDs(TO);
       lightHourLEDs(Hour_DST+1);
     }
-    
     if (minute() >= 0 && minute() < 5) { // sets the 'oclock' light if the time is on the hour
       lightHourLEDs(Hour_DST);
       lightWordLEDs(OCLOCK);
@@ -255,16 +243,13 @@ void Clockset(){
         lightBirthdayLEDs(BIRTHDAY);
         FastLED.show();
       }
-      
       birthdayAddress += 2;
     }
-    
-    FastLED.show();
-      
+    FastLED.show(); 
   }
   
   // **************animations for quarter to qurter past and half past the hour *******************
-  if(minute() == 45 && second() ==00){
+  if(minute() == 45 && second() ==00) {
     FastLED.clear ();
     animateWordLEDs(ITS);
     delay(500);
@@ -275,7 +260,7 @@ void Clockset(){
     FastLED.show();
   }
   
-  if(minute() == 15 && second() ==00){
+  if(minute() == 15 && second() ==00) {
     FastLED.clear ();
     animateWordLEDs(ITS);
     delay(500);
@@ -286,7 +271,7 @@ void Clockset(){
     FastLED.show();
   }
   
-  if(minute() == 30 && second() ==00){
+  if(minute() == 30 && second() ==00) {
     FastLED.clear ();
     animateWordLEDs(ITS);
     delay(500);
@@ -351,22 +336,19 @@ void Animation(){ /// animation to run on the hour
 
 void hourAnimation() {
 //animation for on the hour
-  if(minute() == 00 && second() >= 00 && second() <=8){
+  if(minute() == 00 && second() >= 00 && second() <=8) {
     Animation();
   }
-  
-  if(minute() == 00 && second() == 01){    // do a 10sec animation when it hits the hour
+  if(minute() == 00 && second() == 01) {    // do a 10sec animation when it hits the hour
     lightWordLEDs(ITS); 
     FastLED.show();
   }
-  
-  if(minute() == 00 && second() >1 && second() <=2){   
+  if(minute() == 00 && second() >1 && second() <=2) {   
     lightWordLEDs(ITS);
     lightHourLEDs(Hour_DST);
     FastLED.show();
-  }
-  
-  if(minute() == 00 && second() >2 && second() <=8){    // do a 8sec animation when it hits the hour
+  } 
+  if(minute() == 00 && second() >2 && second() <=8) {    // do a 8sec animation when it hits the hour
     lightWordLEDs(ITS);
     lightHourLEDs(Hour_DST);
     lightWordLEDs(OCLOCK);
@@ -380,12 +362,12 @@ void hourAnimation() {
 
 void brightnessSet () {
   int ambiant_Light = analogRead(PHOTO_RESISTOR);    // read the value of the photoresisor
-  int Brightness_Set = map(ambiant_Light, 0, 400, 50, 250); // map the ambiant light value to a LED brightness value
+  int Brightness_Set = map(ambiant_Light, 0, 400, 20, 250); // map the ambiant light value to a LED brightness value
   
-  if (ambiant_Light >= 400){ 
+  if (ambiant_Light >= 400) { 
     FastLED.setBrightness(250);
   }
-  if (ambiant_Light < 400){
+  if (ambiant_Light < 400) {
     FastLED.setBrightness(Brightness_Set);  // set the brightness of the LEDs
   }
 }
@@ -401,7 +383,6 @@ void bluetoothGetInput() { //take the message set by bluetooth and then add all 
   
   while (BT.available() > 0 && newData == false) {    //create a char array untill you get a /n signal from bluetooth
     rc = BT.read();
-  
     if (rc != endMarker) {
       receivedData[ndx] = rc;
       ndx++;
@@ -417,7 +398,8 @@ void bluetoothGetInput() { //take the message set by bluetooth and then add all 
   }
 }
 
-void bluetoothCheckInput() { //If the message sent is the same as the trigger word "settime" then ask for user to enter date and time
+void bluetoothCheckInput() { 
+  //If the message sent is the same as the trigger words
   if (newData == true && (strcasecmp("settime",receivedData) == 0)) {
     BT.println();
     BT.println("Set the Time (without daylight savings time added) & Date as: hh,mm,ss,dd,mm,yyyy");
